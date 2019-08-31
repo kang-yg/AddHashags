@@ -1,0 +1,17 @@
+<resources>
+    <!-- Basic -->
+    <string name="app_name">AddHashtags</string>
+    <!-- BottomNavi -->
+    <string name="popularTags">POP</string>
+    <string name="myTags">MINE</string>
+    <!-- AddTags.xml -->
+    <string name="addMyTags_edit">addMyTags_edit</string>
+    <string name="addMyTags_button">addMyTags_button</string>
+    <!-- Popular subjects -->
+    <string name="top">TOP 10</string>
+    <string name="love">사랑</string>
+    <string name="daily">일상</string>
+    <string name="selfie">셀카</string>
+    <string name="food">음식</string>
+    <string name="trip">여행</string>
+</resources>
