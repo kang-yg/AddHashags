@@ -88,6 +88,8 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
         return subjectItems.size();
     }
 
+    //체크박스 선택시 레이아웃 GONE → VISIBLE
+    //TODO 체크박스 선택시 레이아웃 VISIBLE → GONE
     public void checkAllCheckbox(MyViewHolder myViewHolder, ArrayList<SubjectItem> subjectItems) {
         Log.d("SubjectRecyclerviewAdapter", "checkAllCheckbox");
         ArrayList<Boolean> booleans = new ArrayList<>();
@@ -98,7 +100,7 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
 
         if (booleans.contains(true)) {
             Log.d("SubjectRecyclerviewAdapter", "checkAllCheckbox : VISIBLE");
-            mainSingleton.linearLayout.setVisibility(View.VISIBLE);
+            mainSingleton.bigLnearLayout.setVisibility(View.VISIBLE);
         }
 //        else if (!booleans.contains(true)) {
 //            Log.d("SubjectRecyclerviewAdapter", "checkAllCheckbox : GONE");
@@ -106,6 +108,7 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
 //        }
     }
 
+    //레이아웃에 선택한 태그 추가
     public TextView addTextview(View view, String string) {
         MainSingleton mainSingleton = MainSingleton.getInstance();
         TextView textView = new TextView(view.getContext());
@@ -119,6 +122,7 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
         return textView;
     }
 
+    //레이아웃에 선택한 태그 취소
     public void removeTextview(TextView textView) {
         ((ViewManager)textView.getParent()).removeView(textView);
     }

@@ -5,7 +5,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.FrameLayout;
+import android.view.View;
+import android.widget.Toast;
 
 import com.AddHashtags.BottomNaviFrame;
 import com.AddHashtags.MainSingleton;
@@ -29,7 +30,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
 
         mainSingleton.mainActivity = this;
+        mainSingleton.bigLnearLayout = findViewById(R.id.big_linearVisibility);
         mainSingleton.linearLayout = findViewById(R.id.linearVisibility);
+        mainSingleton.linearLayoutButton = findViewById(R.id.copy_button);
+        mainSingleton.linearLayoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.copyDone), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         bottomNaviFrame = new BottomNaviFrame();
         popularSubject = new PopularSubject();
@@ -40,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setFrag(0);
     }
 
+    //BottomNavi 프래그먼트
     public void setBottomNavi() {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -48,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    //MainFrame 변경
     public void setFrag(int n) {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();

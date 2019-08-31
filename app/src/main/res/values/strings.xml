@@ -7,6 +7,8 @@
     <!-- AddTags.xml -->
     <string name="addMyTags_edit">addMyTags_edit</string>
     <string name="addMyTags_button">addMyTags_button</string>
+    <!-- AddTags.xml -->
+    <string name="copy">복사</string>
     <!-- Popular subjects -->
     <string name="top">TOP 10</string>
     <string name="love">사랑</string>
@@ -14,4 +16,6 @@
     <string name="selfie">셀카</string>
     <string name="food">음식</string>
     <string name="trip">여행</string>
+    <!-- MainActivity -->
+    <string name="copyDone">복사완료</string>
 </resources>

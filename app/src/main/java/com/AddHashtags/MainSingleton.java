@@ -1,5 +1,6 @@
 package com.AddHashtags;
 
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.addhashtags.MainActivity;
@@ -9,6 +10,8 @@ public class MainSingleton {
 
     public MainActivity mainActivity;
     public LinearLayout linearLayout;
+    public LinearLayout bigLnearLayout;
+    public Button linearLayoutButton;
 
 
     public static MainSingleton getInstance() {
