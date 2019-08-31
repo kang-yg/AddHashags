@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.addhashtags.R;
 
@@ -36,8 +37,8 @@ public class SubjectRecyclerview extends Fragment {
 
         ArrayList<SubjectItem> subjectItems = new ArrayList<>();
 
-        subjectItems.add(new SubjectItem("오늘",false));
-        subjectItems.add(new SubjectItem("내일",false));
+        subjectItems.add(new SubjectItem("오늘", false));
+        subjectItems.add(new SubjectItem("내일", false));
 
         SubjectRecyclerviewAdapter subjectRecyclerviewAdapter = new SubjectRecyclerviewAdapter(subjectItems);
 

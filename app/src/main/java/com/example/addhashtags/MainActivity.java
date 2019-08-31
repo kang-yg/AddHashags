@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
 
         mainSingleton.mainActivity = this;
+        mainSingleton.linearLayout = findViewById(R.id.linearVisibility);
 
         bottomNaviFrame = new BottomNaviFrame();
         popularSubject = new PopularSubject();
