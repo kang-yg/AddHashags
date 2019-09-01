@@ -140,7 +140,7 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
         globalVariable.addSelectedTags("#" + string);
 
         for (int i = 0; i < globalVariable.getSelectedTags().size(); i++) {
-            Log.d("addTextview", globalVariable.getSelectedTags().get(i));
+            Log.d("Textview", globalVariable.getSelectedTags().get(i));
         }
 
         return textView;
@@ -155,7 +155,7 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
         globalVariable.removeSelectedTags(textView.getText().toString());
 
         for (int i = 0; i < globalVariable.getSelectedTags().size(); i++) {
-            Log.d("removeTextview", globalVariable.getSelectedTags().get(i));
+            Log.d("Textview", globalVariable.getSelectedTags().get(i));
         }
     }
 }

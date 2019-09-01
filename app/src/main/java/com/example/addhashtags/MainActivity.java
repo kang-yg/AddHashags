@@ -12,6 +12,7 @@ import com.AddHashtags.BottomNaviFrame;
 import com.AddHashtags.CopyTags;
 import com.AddHashtags.GlobalVariable;
 import com.AddHashtags.MainSingleton;
+import com.AddHashtags.MyHashtags.Mine;
 import com.AddHashtags.PopularTags.PopularSubject;
 import com.AddHashtags.PopularTags.SubjectRecyclerview;
 
@@ -20,9 +21,11 @@ public class MainActivity extends AppCompatActivity {
     public FragmentManager fragmentManager;
     public FragmentTransaction fragmentTransaction;
 
+    //프래그먼트 뷰
     PopularSubject popularSubject;
     BottomNaviFrame bottomNaviFrame;
     SubjectRecyclerview subjectRecyclerview;
+    Mine mine;
 
     public static MainSingleton mainSingleton = MainSingleton.getInstance();
 
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNaviFrame = new BottomNaviFrame();
         popularSubject = new PopularSubject();
         subjectRecyclerview = new SubjectRecyclerview();
+        mine = new Mine();
 
         setBottomNavi();
 
@@ -70,13 +74,22 @@ public class MainActivity extends AppCompatActivity {
 
         switch (n) {
             case 0:
+                //PopularSubject
                 Log.d("setFrag()", "0");
                 fragmentTransaction.replace(R.id.mainFrame, popularSubject);
                 fragmentTransaction.commit();
                 break;
             case 1:
+                //SubjectRecyclerview
                 Log.d("setFrag()", "1");
                 fragmentTransaction.replace(R.id.mainFrame, subjectRecyclerview);
+                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null);
+                break;
+            case 2:
+                //Mine
+                Log.d("setFrag()", "2");
+                fragmentTransaction.replace(R.id.mainFrame, mine);
                 fragmentTransaction.commit();
                 fragmentTransaction.addToBackStack(null);
                 break;

@@ -1,7 +1,5 @@
 package com.AddHashtags;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 public class GlobalVariable {
