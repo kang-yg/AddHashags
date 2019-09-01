@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.AddHashtags.BottomNaviFrame;
+import com.AddHashtags.CopyTags;
+import com.AddHashtags.GlobalVariable;
 import com.AddHashtags.MainSingleton;
 import com.AddHashtags.PopularTags.PopularSubject;
 import com.AddHashtags.PopularTags.SubjectRecyclerview;
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         mainSingleton.linearLayoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GlobalVariable globalVariable = GlobalVariable.getInstance();
+                CopyTags copyTags = new CopyTags(globalVariable.getSelectedTags());
+                copyTags.copyTagsCilpboard();
                 Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.copyDone), Toast.LENGTH_SHORT).show();
             }
         });

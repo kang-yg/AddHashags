@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewManager;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.AddHashtags.GlobalVariable;
 import com.AddHashtags.MainSingleton;
 import com.example.addhashtags.R;
 
@@ -61,19 +63,33 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
             }
         });
 
+        final MainSingleton mainSingleton = MainSingleton.getInstance();
+
         myViewHolder.checkBox.setChecked(subjectItems.get(position).check);
-        myViewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
+        myViewHolder.checkBox.setChecked(myViewHolder.checkBox.isSelected());
+        myViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                Log.d("SubjectRecyclerviewAdapter", "checkBox.onClick : " + myViewHolder.checkBox.isChecked());
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 checkAllCheckbox(myViewHolder, subjectItems);
                 if (myViewHolder.checkBox.isChecked() == true) {
-                    temp[0] = addTextview(v, myViewHolder.textView.getText().toString());
+                    temp[0] = addTextview(mainSingleton.linearLayout, myViewHolder.textView.getText().toString());
                 } else if (myViewHolder.checkBox.isChecked() == false) {
                     removeTextview(temp[0]);
                 }
             }
         });
+//        myViewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("SubjectRecyclerviewAdapter", "checkBox.onClick : " + myViewHolder.checkBox.isChecked());
+//                checkAllCheckbox(myViewHolder, subjectItems);
+//                if (myViewHolder.checkBox.isChecked() == true) {
+//                    temp[0] = addTextview(v, myViewHolder.textView.getText().toString());
+//                } else if (myViewHolder.checkBox.isChecked() == false) {
+//                    removeTextview(temp[0]);
+//                }
+//            }
+//        });
 
         for (int i = 0; i < subjectItems.size(); i++) {
             Log.d("SubjectRecyclerviewAdapter", "onBindViewHolder() : " + subjectItems.get(i).tagName);
@@ -111,6 +127,8 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
     //레이아웃에 선택한 태그 추가
     public TextView addTextview(View view, String string) {
         MainSingleton mainSingleton = MainSingleton.getInstance();
+        GlobalVariable globalVariable = GlobalVariable.getInstance();
+
         TextView textView = new TextView(view.getContext());
         textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         textView.setText("#" + string);
@@ -119,11 +137,25 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
         textView.setTextColor(Color.parseColor("#000000"));
         mainSingleton.linearLayout.addView(textView);
 
+        globalVariable.addSelectedTags("#" + string);
+
+        for (int i = 0; i < globalVariable.getSelectedTags().size(); i++) {
+            Log.d("addTextview", globalVariable.getSelectedTags().get(i));
+        }
+
         return textView;
     }
 
     //레이아웃에 선택한 태그 취소
     public void removeTextview(TextView textView) {
-        ((ViewManager)textView.getParent()).removeView(textView);
+        GlobalVariable globalVariable = GlobalVariable.getInstance();
+
+        ((ViewManager) textView.getParent()).removeView(textView);
+
+        globalVariable.removeSelectedTags(textView.getText().toString());
+
+        for (int i = 0; i < globalVariable.getSelectedTags().size(); i++) {
+            Log.d("removeTextview", globalVariable.getSelectedTags().get(i));
+        }
     }
 }
