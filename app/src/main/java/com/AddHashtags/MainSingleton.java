@@ -1,5 +1,7 @@
 package com.AddHashtags;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -12,7 +14,6 @@ public class MainSingleton {
     public LinearLayout linearLayout;
     public LinearLayout bigLnearLayout;
     public Button linearLayoutButton;
-
 
     public static MainSingleton getInstance() {
         if (instance == null) {

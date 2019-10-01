@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     PopularSubject popularSubject;
     BottomNaviFrame bottomNaviFrame;
     SubjectRecyclerview subjectRecyclerview;
-    Mine mine;
+    public Mine mine;
 
     public static MainSingleton mainSingleton = MainSingleton.getInstance();
 

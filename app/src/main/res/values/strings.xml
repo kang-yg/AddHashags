@@ -18,4 +18,7 @@
     <string name="trip">여행</string>
     <!-- MainActivity -->
     <string name="copyDone">복사완료</string>
+    <!-- mine.xml -->
+    <string name="save">저장</string>
+    <string name="editTextHint">저장할 태그명을 입력하세요(ex.사랑)</string>
 </resources>

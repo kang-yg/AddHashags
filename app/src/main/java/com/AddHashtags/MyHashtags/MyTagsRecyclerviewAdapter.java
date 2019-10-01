@@ -1,4 +1,4 @@
-package com.AddHashtags.PopularTags;
+package com.AddHashtags.MyHashtags;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -19,58 +19,47 @@ import com.example.addhashtags.R;
 
 import java.util.ArrayList;
 
-public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         CheckBox checkBox;
 
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            this.textView = itemView.findViewById(R.id.sub_recyclerview_item_text);
-            this.checkBox = itemView.findViewById(R.id.sub_recyclerview_item_checkBox);
+        public MyViewHolder(View view) {
+            super(view);
+            this.textView = view.findViewById(R.id.mine_item_text);
+            this.checkBox = view.findViewById(R.id.mine_item_checkBox);
         }
     }
 
-    private ArrayList<SubjectItem> subjectItems;
+    private ArrayList<MyTagsItem> myTagsItems;
 
-    SubjectRecyclerviewAdapter(ArrayList<SubjectItem> subjectItems) {
-        this.subjectItems = subjectItems;
+    MyTagsRecyclerviewAdapter(ArrayList<MyTagsItem> myTagsItems) {
+        this.myTagsItems = myTagsItems;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("SubjectRecyclerviewAdapter", "onCreateViewHolder()");
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.subject_recyclerview_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mine_item, parent, false);
 
-        return new MyViewHolder(v);
+        return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Log.d("SubjectRecyclerviewAdapter", "onBindViewHolder()");
-
         final MyViewHolder myViewHolder = (MyViewHolder) holder;
         final TextView[] temp = new TextView[1];
 
-        myViewHolder.textView.setText(subjectItems.get(position).tagName);
-        myViewHolder.textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Boolean flag = false;
-            }
-        });
+        myViewHolder.textView.setText(myTagsItems.get(position).tagName);
 
         final MainSingleton mainSingleton = MainSingleton.getInstance();
-
-        myViewHolder.checkBox.setChecked(subjectItems.get(position).check);
-//        myViewHolder.checkBox.setChecked(myViewHolder.checkBox.isSelected());
+        myViewHolder.checkBox.setChecked(myTagsItems.get(position).check);
         myViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                checkAllCheckbox(myViewHolder, subjectItems);
+                checkAllCheckbox(myViewHolder, myTagsItems);
                 if (myViewHolder.checkBox.isChecked() == true) {
                     temp[0] = addTextview(mainSingleton.linearLayout, myViewHolder.textView.getText().toString());
                 } else if (myViewHolder.checkBox.isChecked() == false) {
@@ -78,39 +67,20 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
                 }
             }
         });
-//        myViewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("SubjectRecyclerviewAdapter", "checkBox.onClick : " + myViewHolder.checkBox.isChecked());
-//                checkAllCheckbox(myViewHolder, subjectItems);
-//                if (myViewHolder.checkBox.isChecked() == true) {
-//                    temp[0] = addTextview(v, myViewHolder.textView.getText().toString());
-//                } else if (myViewHolder.checkBox.isChecked() == false) {
-//                    removeTextview(temp[0]);
-//                }
-//            }
-//        });
-
-        for (int i = 0; i < subjectItems.size(); i++) {
-            Log.d("SubjectRecyclerviewAdapter", "onBindViewHolder() : " + subjectItems.get(i).tagName);
-            Log.d("SubjectRecyclerviewAdapter", "onBindViewHolder() : " + subjectItems.get(i).check);
-        }
     }
 
     @Override
     public int getItemCount() {
-        Log.d("SubjectRecyclerviewAdapter", "getItemCount()");
-        Log.d("SubjectRecyclerviewAdapter", "getItemCount() : " + subjectItems.size());
-        return subjectItems.size();
+        return myTagsItems.size();
     }
 
     //체크박스 선택시 레이아웃 GONE → VISIBLE
     //TODO 체크박스 선택시 레이아웃 VISIBLE → GONE
-    public void checkAllCheckbox(MyViewHolder myViewHolder, ArrayList<SubjectItem> subjectItems) {
+    public void checkAllCheckbox(MyTagsRecyclerviewAdapter.MyViewHolder myViewHolder, ArrayList<MyTagsItem> myTagsItems) {
         Log.d("SubjectRecyclerviewAdapter", "checkAllCheckbox");
         ArrayList<Boolean> booleans = new ArrayList<>();
         MainSingleton mainSingleton = MainSingleton.getInstance();
-        for (int i = 0; i < subjectItems.size(); i++) {
+        for (int i = 0; i < myTagsItems.size(); i++) {
             booleans.add(myViewHolder.checkBox.isChecked());
         }
 
