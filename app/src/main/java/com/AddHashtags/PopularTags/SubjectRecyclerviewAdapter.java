@@ -64,20 +64,46 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
         });
 
         final MainSingleton mainSingleton = MainSingleton.getInstance();
-
+        final GlobalVariable globalVariable = GlobalVariable.getInstance();
         myViewHolder.checkBox.setChecked(subjectItems.get(position).check);
-//        myViewHolder.checkBox.setChecked(myViewHolder.checkBox.isSelected());
         myViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                checkAllCheckbox(myViewHolder, subjectItems);
-                if (myViewHolder.checkBox.isChecked() == true) {
-                    temp[0] = addTextview(mainSingleton.linearLayout, myViewHolder.textView.getText().toString());
-                } else if (myViewHolder.checkBox.isChecked() == false) {
-                    removeTextview(temp[0]);
+                String temp = "#" + myViewHolder.textView.getText().toString();
+                String str = "";
+                if(myViewHolder.checkBox.isChecked() == true){
+                    mainSingleton.bigLnearLayout.setVisibility(View.VISIBLE);
+                    globalVariable.addSelectedTags(temp);
+                    for(int i = 0 ; i < globalVariable.sizeSelectedTags() ; i++){
+                        str += globalVariable.getSelectedTags(i);
+                        mainSingleton.textView.setText(str);
+                    }
+                }else if(myViewHolder.checkBox.isChecked() == false){
+                    globalVariable.removeSelectedTags(temp);
+                    if(globalVariable.sizeSelectedTags() == 0){
+                        mainSingleton.textView.setText(null);
+                    }
+                    for(int i = 0 ; i < globalVariable.sizeSelectedTags() ; i++){
+                        str += globalVariable.getSelectedTags(i);
+                        mainSingleton.textView.setText(str);
+                    }
                 }
             }
         });
+
+//        myViewHolder.checkBox.setChecked(subjectItems.get(position).check);
+//        myViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                checkAllCheckbox(myViewHolder, subjectItems);
+//                if (myViewHolder.checkBox.isChecked() == true) {
+//                    temp[0] = addTextview(mainSingleton.linearLayout, myViewHolder.textView.getText().toString());
+//                } else if (myViewHolder.checkBox.isChecked() == false) {
+//                    removeTextview(temp[0]);
+//                }
+//            }
+//        });
+
 //        myViewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

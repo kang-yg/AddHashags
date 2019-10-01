@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         mainSingleton.mainActivity = this;
         mainSingleton.bigLnearLayout = findViewById(R.id.big_linearVisibility);
-        mainSingleton.linearLayout = findViewById(R.id.linearVisibility);
+        mainSingleton.textView = findViewById(R.id.linearVisibility_text);
+//        mainSingleton.linearLayout = findViewById(R.id.linearVisibility);
         mainSingleton.linearLayoutButton = findViewById(R.id.copy_button);
         mainSingleton.linearLayoutButton.setOnClickListener(new View.OnClickListener() {
             @Override

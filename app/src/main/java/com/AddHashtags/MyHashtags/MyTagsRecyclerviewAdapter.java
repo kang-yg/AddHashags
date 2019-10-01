@@ -54,19 +54,53 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
 
         myViewHolder.textView.setText(myTagsItems.get(position).tagName);
 
+        final GlobalVariable globalVariable = GlobalVariable.getInstance();
         final MainSingleton mainSingleton = MainSingleton.getInstance();
         myViewHolder.checkBox.setChecked(myTagsItems.get(position).check);
         myViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                checkAllCheckbox(myViewHolder, myTagsItems);
+                String temp = "#" + myViewHolder.textView.getText().toString() + " ";
+                String str = "";
                 if (myViewHolder.checkBox.isChecked() == true) {
-                    temp[0] = addTextview(mainSingleton.linearLayout, myViewHolder.textView.getText().toString());
+                    mainSingleton.bigLnearLayout.setVisibility(View.VISIBLE);
+                    globalVariable.addSelectedTags(temp);
+                    for(int i = 0 ; i < globalVariable.sizeSelectedTags() ; i++){
+                        str += globalVariable.getSelectedTags(i);
+                        mainSingleton.textView.setText(str);
+                    }
+                    for(int i = 0 ; i < globalVariable.sizeSelectedTags() ; i++){
+                        Log.d("mainSingleton.textView", globalVariable.getSelectedTags(i));
+                    }
                 } else if (myViewHolder.checkBox.isChecked() == false) {
-                    removeTextview(temp[0]);
+                    globalVariable.removeSelectedTags(temp);
+                    if(globalVariable.sizeSelectedTags() == 0){
+                        mainSingleton.textView.setText(null);
+                    }
+                    for(int i = 0 ; i < globalVariable.sizeSelectedTags() ; i++){
+                        str += globalVariable.getSelectedTags(i);
+                        mainSingleton.textView.setText(str);
+                    }
+                    for(int i = 0 ; i < globalVariable.sizeSelectedTags() ; i++){
+                        Log.d("mainSingleton.textView", globalVariable.getSelectedTags(i));
+                    }
                 }
             }
         });
+
+//        final MainSingleton mainSingleton = MainSingleton.getInstance();
+//        myViewHolder.checkBox.setChecked(myTagsItems.get(position).check);
+//        myViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                checkAllCheckbox(myViewHolder, myTagsItems);
+//                if (myViewHolder.checkBox.isChecked() == true) {
+//                    temp[0] = addTextview(mainSingleton.linearLayout, myViewHolder.textView.getText().toString());
+//                } else if (myViewHolder.checkBox.isChecked() == false) {
+//                    removeTextview(temp[0]);
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -105,6 +139,7 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
         textView.setTextSize(13);
         textView.setPadding(20, 10, 10, 10);
         textView.setTextColor(Color.parseColor("#000000"));
+
         mainSingleton.linearLayout.addView(textView);
 
         globalVariable.addSelectedTags("#" + string);

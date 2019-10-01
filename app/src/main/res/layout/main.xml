@@ -23,15 +23,22 @@
         android:orientation="horizontal"
         android:visibility="gone">
 
-        <LinearLayout
-            android:id="@+id/linearVisibility"
+        <TextView
+            android:id="@+id/linearVisibility_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="8"
-            android:background="@android:color/white"
-            android:orientation="horizontal">
+            android:textColor="@color/colorAccent"
+            android:layout_weight="8" />
 
-        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:id="@+id/linearVisibility"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="8"-->
+            <!--android:background="@android:color/white"-->
+            <!--android:orientation="horizontal">-->
+
+        <!--</LinearLayout>-->
 
         <Button
             android:id="@+id/copy_button"

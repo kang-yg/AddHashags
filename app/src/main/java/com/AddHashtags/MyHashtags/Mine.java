@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.AddHashtags.MainSingleton;
 import com.example.addhashtags.R;
@@ -45,16 +46,27 @@ public class Mine extends Fragment {
         database = helper.getWritableDatabase();
         helper.createTable(database, tableName);
 
-        final MainSingleton mainSingleton = MainSingleton.getInstance();
-        mineButton.setOnClickListener(new View.OnClickListener() {
+        ArrayList<String> myTagsName = new ArrayList<>();
+        myTagsName = helper.selectData(database, tableName);
 
+        final MainSingleton mainSingleton = MainSingleton.getInstance();
+        final ArrayList<String> finalMyTagsName = myTagsName;
+        mineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String temp = mineEditText.getText().toString().trim();
+                temp = temp.replaceAll(" ","");
 
-                helper.insertData(database, temp);
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.detach(mainSingleton.mainActivity.mine).attach(mainSingleton.mainActivity.mine).commit();
+                if(!finalMyTagsName.contains(temp)){
+                    helper.insertData(database, temp);
+                    mineEditText.setText("");
+                    Toast.makeText(getContext(), getString(R.string.successInsert), Toast.LENGTH_SHORT).show();
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.detach(mainSingleton.mainActivity.mine).attach(mainSingleton.mainActivity.mine).commit();
+                }else {
+                    mineEditText.setText("");
+                    Toast.makeText(getContext(), getString(R.string.alreadyExist), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -64,9 +76,6 @@ public class Mine extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         ArrayList<MyTagsItem> myTagsItems = new ArrayList<>();
-        ArrayList<String> myTagsName = new ArrayList<>();
-
-        myTagsName = helper.selectData(database, tableName);
 
         for(int i = 0 ; i<myTagsName.size() ; i++){
             myTagsItems.add(new MyTagsItem(myTagsName.get(i), false));

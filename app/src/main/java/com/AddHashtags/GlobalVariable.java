@@ -19,11 +19,19 @@ public class GlobalVariable {
         return this.selectedTags;
     }
 
+    public String getSelectedTags(int index){
+        return selectedTags.get(index);
+    }
+
     public void addSelectedTags(String str) {
         this.selectedTags.add(str);
     }
 
     public void removeSelectedTags(String str){
         this.selectedTags.remove(str);
+    }
+
+    public int sizeSelectedTags(){
+        return selectedTags.size();
     }
 }
