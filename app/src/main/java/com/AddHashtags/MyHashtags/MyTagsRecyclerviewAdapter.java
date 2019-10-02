@@ -1,7 +1,11 @@
 package com.AddHashtags.MyHashtags;
 
+import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.AddHashtags.GlobalVariable;
 import com.AddHashtags.MainSingleton;
@@ -51,11 +56,48 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final MyViewHolder myViewHolder = (MyViewHolder) holder;
         final TextView[] temp = new TextView[1];
+        final MainSingleton mainSingleton = MainSingleton.getInstance();
 
         myViewHolder.textView.setText(myTagsItems.get(position).tagName);
+        myViewHolder.textView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(final View v) {
+                Log.d("onLongClick", "onLongClick");
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle(R.string.deleteTag);
+                builder.setCancelable(false);
+                builder.setPositiveButton(R.string.disagree, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).setNegativeButton(R.string.agree, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final String databaseName =  "MYTAGS";
+                        final String tableName = "MYTAGLIST";
+                        DatabaseHelper helper;
+                        SQLiteDatabase database;
+
+                        helper = new DatabaseHelper(v.getContext(), databaseName, null,3);
+                        database = helper.getWritableDatabase();
+                        helper.createTable(database, tableName);
+
+                        helper.deleteData(database,myViewHolder.textView.getText().toString());
+                        MineSingleton mineSingleton = MineSingleton.getInstance();
+                        FragmentTransaction fragmentTransaction = mineSingleton.adpterFragmentTransaction;
+                        fragmentTransaction.detach(mainSingleton.mainActivity.mine).attach(mainSingleton.mainActivity.mine).commit();
+                        Toast.makeText(v.getContext(), R.string.deleteSuccess, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                return false;
+            }
+        });
 
         final GlobalVariable globalVariable = GlobalVariable.getInstance();
-        final MainSingleton mainSingleton = MainSingleton.getInstance();
         myViewHolder.checkBox.setChecked(myTagsItems.get(position).check);
         myViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

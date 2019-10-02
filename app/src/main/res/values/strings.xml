@@ -24,4 +24,9 @@
     <!-- Mine -->
     <string name="alreadyExist">이미 저장된 태그입니다</string>
     <string name="successInsert">저정 완료</string>
+    <!-- MyTagsRecyclerviewAdapter -->
+    <string name="deleteTag">태그를 삭제 하시겠습니까?</string>
+    <string name="disagree">취소</string>
+    <string name="agree">삭제</string>
+    <string name="deleteSuccess">삭제 완료</string>
 </resources>

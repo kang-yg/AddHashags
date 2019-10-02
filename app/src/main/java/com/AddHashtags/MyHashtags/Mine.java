@@ -39,6 +39,8 @@ public class Mine extends Fragment {
 
         final View view = inflater.inflate(R.layout.mine, null);
 
+        getAdapterFragmentTransaction();
+
         mineEditText = view.findViewById(R.id.mine_editText);
         mineButton = view.findViewById(R.id.mine_button);
 
@@ -86,5 +88,11 @@ public class Mine extends Fragment {
         recyclerView.setAdapter(myTagsRecyclerviewAdapter);
 
         return view;
+    }
+
+    protected void getAdapterFragmentTransaction(){
+        MineSingleton mineSingleton = MineSingleton.getInstance();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        mineSingleton.adpterFragmentTransaction = fragmentTransaction;
     }
 }

@@ -56,6 +56,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void deleteData(SQLiteDatabase database, String tagName){
+        if(database != null){
+            String sql = "delete from MYTAGLIST where tagName =" + "'" + tagName + "'" ;
+            database.execSQL(sql);
+        }
+    }
+
     public ArrayList<String> selectData(SQLiteDatabase database, String tableName) {
         ArrayList<String> arrayList = new ArrayList<>();
         if (database != null) {
