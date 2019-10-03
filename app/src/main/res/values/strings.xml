@@ -9,9 +9,11 @@
     <string name="addMyTags_button">addMyTags_button</string>
     <!-- AddTags.xml -->
     <string name="copy">복사</string>
+
     <!-- mine.xml -->
     <string name="save">저장</string>
     <string name="editTextHint">저장할 태그명을 입력하세요(ex.사랑)</string>
+
     <!-- Popular subjects -->
     <string name="top">TOP 10</string>
     <string name="love">사랑</string>
@@ -19,11 +21,46 @@
     <string name="selfie">셀카</string>
     <string name="food">음식</string>
     <string name="trip">여행</string>
+
+    <!-- TOP100 -->
+    <string-array name="TOP100">
+        <item>오늘</item>
+        <item>내일</item>
+    </string-array>
+    <!-- 사랑 -->
+    <string-array name="love">
+        <item>love</item>
+        <item>instalove</item>
+    </string-array>
+    <!-- 일상 -->
+    <string-array name="daily">
+        <item>일상</item>
+    </string-array>
+    <!-- 셀카 -->
+    <string-array name="selfie">
+        <item>selfie</item>
+    </string-array>
+    <!-- 음식 -->
+    <string-array name="food">
+        <item>음식</item>
+        <item>맛집</item>
+    </string-array>
+    <!-- 여행 -->
+    <string-array name="trip">
+        <item>여행</item>
+        <item>trip</item>
+    </string-array>
+
+    <!-- Popular subjects Adapter -->
+    <string name="alreadySelectde">이미 선택된 태그입니다.</string>
+
     <!-- MainActivity -->
     <string name="copyDone">복사완료</string>
+
     <!-- Mine -->
     <string name="alreadyExist">이미 저장된 태그입니다</string>
     <string name="successInsert">저정 완료</string>
+
     <!-- MyTagsRecyclerviewAdapter -->
     <string name="deleteTag">태그를 삭제 하시겠습니까?</string>
     <string name="disagree">취소</string>

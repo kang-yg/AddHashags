@@ -12,9 +12,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.AddHashtags.GlobalVariable;
 import com.AddHashtags.MainSingleton;
+import com.AddHashtags.MyHashtags.MineSingleton;
 import com.example.addhashtags.R;
 
 import java.util.ArrayList;
@@ -67,22 +69,34 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 String temp = "#" + myViewHolder.textView.getText().toString();
                 String str = "";
-                if(myViewHolder.checkBox.isChecked() == true){
-                    mainSingleton.bigLnearLayout.setVisibility(View.VISIBLE);
-                    globalVariable.addSelectedTags(temp);
-                    for(int i = 0 ; i < globalVariable.sizeSelectedTags() ; i++){
-                        str += globalVariable.getSelectedTags(i);
-                        mainSingleton.textView.setText(str);
+                if (myViewHolder.checkBox.isChecked() == true) {
+                    if (!globalVariable.getSelectedTags().contains(temp)) {
+                        if(globalVariable.sizeSelectedTags() < 30){
+                            mainSingleton.bigLnearLayout.setVisibility(View.VISIBLE);
+                            globalVariable.addSelectedTags(temp);
+                            for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
+                                str += globalVariable.getSelectedTags(i);
+                                mainSingleton.textView.setText(str);
+                            }
+                        } else {
+                            myViewHolder.checkBox.setChecked(false);
+                            SubjectRecyclerviewSingleton subjectRecyclerviewSingleton = SubjectRecyclerviewSingleton.getInstence();
+                            Toast.makeText(subjectRecyclerviewSingleton.subjectRecyclerviewSingletonContext, R.string.maxTag, Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        myViewHolder.checkBox.setChecked(true);
+                        SubjectRecyclerviewSingleton subjectRecyclerviewSingleton = SubjectRecyclerviewSingleton.getInstence();
+                        Toast.makeText(subjectRecyclerviewSingleton.subjectRecyclerviewSingletonContext, R.string.alreadySelectde, Toast.LENGTH_SHORT).show();
                     }
-                }else if(myViewHolder.checkBox.isChecked() == false){
+                } else if (myViewHolder.checkBox.isChecked() == false) {
                     globalVariable.removeSelectedTags(temp);
-                    if(globalVariable.sizeSelectedTags() < 1){
+                    if (globalVariable.sizeSelectedTags() < 1) {
                         mainSingleton.bigLnearLayout.setVisibility(View.GONE);
                     }
-                    if(globalVariable.sizeSelectedTags() == 0){
+                    if (globalVariable.sizeSelectedTags() == 0) {
                         mainSingleton.textView.setText(null);
                     }
-                    for(int i = 0 ; i < globalVariable.sizeSelectedTags() ; i++){
+                    for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
                         str += globalVariable.getSelectedTags(i);
                         mainSingleton.textView.setText(str);
                     }

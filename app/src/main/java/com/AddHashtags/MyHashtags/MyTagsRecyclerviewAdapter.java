@@ -105,20 +105,28 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
                 String temp = "#" + myViewHolder.textView.getText().toString() + " ";
                 String str = "";
                 if (myViewHolder.checkBox.isChecked() == true) {
-                    mainSingleton.bigLnearLayout.setVisibility(View.VISIBLE);
-                    if (globalVariable.sizeSelectedTags() < 30) {
-                        globalVariable.addSelectedTags(temp);
-                        for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
-                            str += globalVariable.getSelectedTags(i);
-                            mainSingleton.textView.setText(str);
+                    if (!globalVariable.getSelectedTags().contains(temp)) {
+                        mainSingleton.bigLnearLayout.setVisibility(View.VISIBLE);
+                        if (globalVariable.sizeSelectedTags() < 30) {
+                            globalVariable.addSelectedTags(temp);
+                            for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
+                                str += globalVariable.getSelectedTags(i);
+                                mainSingleton.textView.setText(str);
+                            }
+                            for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
+                                Log.d("mainSingleton.textView", globalVariable.getSelectedTags(i));
+                            }
+                        } else {
+                            myViewHolder.checkBox.setChecked(false);
+                            MineSingleton mineSingleton = MineSingleton.getInstance();
+                            Toast.makeText(mineSingleton.mineContext, R.string.maxTag, Toast.LENGTH_SHORT).show();
                         }
-                        for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
-                            Log.d("mainSingleton.textView", globalVariable.getSelectedTags(i));
-                        }
-                    } else {
+                    }else {
+                        myViewHolder.checkBox.setChecked(true);
                         MineSingleton mineSingleton = MineSingleton.getInstance();
-                        Toast.makeText(mineSingleton.mineContext, R.string.maxTag, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mineSingleton.mineContext,  R.string.alreadySelectde, Toast.LENGTH_SHORT).show();
                     }
+
 
                 } else if (myViewHolder.checkBox.isChecked() == false) {
                     globalVariable.removeSelectedTags(temp);

@@ -1,5 +1,6 @@
 package com.AddHashtags.PopularTags;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,19 +15,21 @@ import android.view.ViewGroup;
 import com.example.addhashtags.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SubjectRecyclerview extends Fragment {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-
-    public SubjectRecyclerview() {
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.subject_recyclerview, null);
+
+        SubjectRecyclerviewSingleton subjectRecyclerviewSingleton = SubjectRecyclerviewSingleton.getInstence();
+        subjectRecyclerviewSingleton.subjectRecyclerviewSingletonContext = getContext();
 
         recyclerView = view.findViewById(R.id.sub_recyclerview);
         recyclerView.setHasFixedSize(true);
@@ -40,22 +43,41 @@ public class SubjectRecyclerview extends Fragment {
 
         switch (getIndex){
             case 0:
-                subjectItems.add(new SubjectItem("오늘", false));
-                subjectItems.add(new SubjectItem("내일", false));
+                List<String> TOPList = Arrays.asList(getResources().getStringArray(R.array.TOP100));
+                for(int i = 0 ; i < TOPList.size() ; i++){
+                    subjectItems.add(new SubjectItem(TOPList.get(i),false));
+                }
                 break;
             case 1:
-                subjectItems.add(new SubjectItem("럽스타그램", false));
-                subjectItems.add(new SubjectItem("사랑", false));
+                List<String> loveList = Arrays.asList(getResources().getStringArray(R.array.love));
+                for(int i = 0 ; i < loveList.size() ; i++){
+                    subjectItems.add(new SubjectItem(loveList.get(i),false));
+                }
                 break;
             case 2:
-                subjectItems.add(new SubjectItem("일상01", false));
-                subjectItems.add(new SubjectItem("일상02", false));
+                List<String> dailyList = Arrays.asList(getResources().getStringArray(R.array.daily));
+                for(int i = 0 ; i < dailyList.size() ; i++){
+                    subjectItems.add(new SubjectItem(dailyList.get(i),false));
+                }
                 break;
             case 3:
-                subjectItems.add(new SubjectItem("셀카1", false));
-                subjectItems.add(new SubjectItem("셀카2", false));
+                List<String> selfieList = Arrays.asList(getResources().getStringArray(R.array.selfie));
+                for(int i = 0 ; i < selfieList.size() ; i++){
+                    subjectItems.add(new SubjectItem(selfieList.get(i),false));
+                }
                 break;
-
+            case 4:
+                List<String> foodList = Arrays.asList(getResources().getStringArray(R.array.food));
+                for(int i = 0 ; i < foodList.size() ; i++){
+                    subjectItems.add(new SubjectItem(foodList.get(i),false));
+                }
+                break;
+            case 5:
+                List<String> tripList = Arrays.asList(getResources().getStringArray(R.array.trip));
+                for(int i = 0 ; i < tripList.size() ; i++){
+                    subjectItems.add(new SubjectItem(tripList.get(i),false));
+                }
+                break;
         }
 
         SubjectRecyclerviewAdapter subjectRecyclerviewAdapter = new SubjectRecyclerviewAdapter(subjectItems);
