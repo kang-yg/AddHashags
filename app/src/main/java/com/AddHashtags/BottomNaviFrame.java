@@ -32,7 +32,7 @@ public class BottomNaviFrame extends Fragment {
                         mainSingleton.mainActivity.setFrag(0);
                         break;
                     case R.id.myTags:
-                        mainSingleton.mainActivity.setFrag(2);
+                        mainSingleton.mainActivity.setFrag(1);
                         break;
                 }
                 return false;

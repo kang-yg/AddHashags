@@ -25,7 +25,6 @@ public class SubjectRecyclerview extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d("SubjectRecyclerview", "SubjectRecyclerview");
 
         View view = inflater.inflate(R.layout.subject_recyclerview, null);
 
@@ -36,8 +35,28 @@ public class SubjectRecyclerview extends Fragment {
 
         ArrayList<SubjectItem> subjectItems = new ArrayList<>();
 
-        subjectItems.add(new SubjectItem("오늘", false));
-        subjectItems.add(new SubjectItem("내일", false));
+        Bundle bundle = getArguments();
+        int getIndex = bundle.getInt("num");
+
+        switch (getIndex){
+            case 0:
+                subjectItems.add(new SubjectItem("오늘", false));
+                subjectItems.add(new SubjectItem("내일", false));
+                break;
+            case 1:
+                subjectItems.add(new SubjectItem("럽스타그램", false));
+                subjectItems.add(new SubjectItem("사랑", false));
+                break;
+            case 2:
+                subjectItems.add(new SubjectItem("일상01", false));
+                subjectItems.add(new SubjectItem("일상02", false));
+                break;
+            case 3:
+                subjectItems.add(new SubjectItem("셀카1", false));
+                subjectItems.add(new SubjectItem("셀카2", false));
+                break;
+
+        }
 
         SubjectRecyclerviewAdapter subjectRecyclerviewAdapter = new SubjectRecyclerviewAdapter(subjectItems);
 

@@ -41,8 +41,6 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("SubjectRecyclerviewAdapter", "onCreateViewHolder()");
-
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.subject_recyclerview_item, parent, false);
 
         return new MyViewHolder(v);
@@ -50,8 +48,6 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Log.d("SubjectRecyclerviewAdapter", "onBindViewHolder()");
-
         final MyViewHolder myViewHolder = (MyViewHolder) holder;
         final TextView[] temp = new TextView[1];
 
@@ -80,6 +76,9 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
                     }
                 }else if(myViewHolder.checkBox.isChecked() == false){
                     globalVariable.removeSelectedTags(temp);
+                    if(globalVariable.sizeSelectedTags() < 1){
+                        mainSingleton.bigLnearLayout.setVisibility(View.GONE);
+                    }
                     if(globalVariable.sizeSelectedTags() == 0){
                         mainSingleton.textView.setText(null);
                     }

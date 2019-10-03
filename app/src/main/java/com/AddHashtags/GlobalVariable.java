@@ -15,11 +15,11 @@ public class GlobalVariable {
         return instance;
     }
 
-    public ArrayList<String> getSelectedTags(){
+    public ArrayList<String> getSelectedTags() {
         return this.selectedTags;
     }
 
-    public String getSelectedTags(int index){
+    public String getSelectedTags(int index) {
         return selectedTags.get(index);
     }
 
@@ -27,11 +27,11 @@ public class GlobalVariable {
         this.selectedTags.add(str);
     }
 
-    public void removeSelectedTags(String str){
+    public void removeSelectedTags(String str) {
         this.selectedTags.remove(str);
     }
 
-    public int sizeSelectedTags(){
+    public int sizeSelectedTags() {
         return selectedTags.size();
     }
 }

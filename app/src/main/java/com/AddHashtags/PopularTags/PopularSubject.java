@@ -32,15 +32,40 @@ public class PopularSubject extends Fragment {
         button05 = view.findViewById(R.id.popSubject_line03_item01);
         button06 = view.findViewById(R.id.popSubject_line03_item02);
 
-        button01.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener myClick = new View.OnClickListener() {
+            MainSingleton mainSingleton = MainSingleton.getInstance();
             @Override
             public void onClick(View v) {
-                Log.d("PopularSubject", button01.getText().toString());
+                switch (v.getId()){
+                    case R.id.popSubject_line01_item01:
+                        mainSingleton.mainActivity.indexPopularSubject(0);
+                        break;
+                    case R.id.popSubject_line01_item02:
+                        mainSingleton.mainActivity.indexPopularSubject(1);
+                        break;
+                    case R.id.popSubject_line02_item01:
+                        mainSingleton.mainActivity.indexPopularSubject(2);
+                        break;
+                    case R.id.popSubject_line02_item02:
+                        mainSingleton.mainActivity.indexPopularSubject(3);
+                        break;
+                    case R.id.popSubject_line03_item01:
+                        mainSingleton.mainActivity.indexPopularSubject(4);
+                        break;
+                    case R.id.popSubject_line03_item02:
+                        mainSingleton.mainActivity.indexPopularSubject(5);
+                        break;
+                }
 
-                MainSingleton mainSingleton = MainSingleton.getInstance();
-                mainSingleton.mainActivity.setFrag(1);
             }
-        });
+        };
+
+        button01.setOnClickListener(myClick);
+        button02.setOnClickListener(myClick);
+        button03.setOnClickListener(myClick);
+        button04.setOnClickListener(myClick);
+        button05.setOnClickListener(myClick);
+        button06.setOnClickListener(myClick);
 
         return view;
     }

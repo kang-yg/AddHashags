@@ -41,7 +41,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void createTable(SQLiteDatabase database, String tableName) {
-        Log.d("createTable()", "createTable()");
         if (database != null) {
             String sql = "create table if not exists " + tableName + "(_no integer PRIMARY KEY autoincrement, tagName text)";
             database.execSQL(sql);
@@ -56,9 +55,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void deleteData(SQLiteDatabase database, String tagName){
-        if(database != null){
-            String sql = "delete from MYTAGLIST where tagName =" + "'" + tagName + "'" ;
+    public void deleteData(SQLiteDatabase database, String tagName) {
+        if (database != null) {
+            String sql = "delete from MYTAGLIST where tagName =" + "'" + tagName + "'";
             database.execSQL(sql);
         }
     }

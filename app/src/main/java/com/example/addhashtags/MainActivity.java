@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 GlobalVariable globalVariable = GlobalVariable.getInstance();
                 CopyTags copyTags = new CopyTags(globalVariable.getSelectedTags());
                 copyTags.copyTagsCilpboard();
-                Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.copyDone), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.copyDone, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         mine = new Mine();
 
         setBottomNavi();
-
         setFrag(0);
     }
 
@@ -81,19 +80,24 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
                 break;
             case 1:
-                //SubjectRecyclerview
-                Log.d("setFrag()", "1");
-                fragmentTransaction.replace(R.id.mainFrame, subjectRecyclerview);
-                fragmentTransaction.commit();
-                fragmentTransaction.addToBackStack(null);
-                break;
-            case 2:
                 //Mine
-                Log.d("setFrag()", "2");
+                Log.d("setFrag()", "1");
                 fragmentTransaction.replace(R.id.mainFrame, mine);
                 fragmentTransaction.commit();
                 fragmentTransaction.addToBackStack(null);
                 break;
         }
+    }
+
+    public void indexPopularSubject(int n) {
+        Bundle bundle = new Bundle();
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+
+        bundle.putInt("num", n);
+        subjectRecyclerview.setArguments(bundle);
+        fragmentTransaction.replace(R.id.mainFrame, subjectRecyclerview);
+        fragmentTransaction.commit();
+        fragmentTransaction.addToBackStack(null);
     }
 }

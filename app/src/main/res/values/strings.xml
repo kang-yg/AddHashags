@@ -29,4 +29,5 @@
     <string name="disagree">취소</string>
     <string name="agree">삭제</string>
     <string name="deleteSuccess">삭제 완료</string>
+    <string name="maxTag">최대 태그의 개수는 30개 입니다.</string>
 </resources>

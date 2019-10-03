@@ -62,10 +62,10 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
         myViewHolder.textView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View v) {
-                Log.d("onLongClick", "onLongClick");
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle(R.string.deleteTag);
+                builder.setTitle("#" + myViewHolder.textView.getText().toString() + " " + v.getContext().getResources().getString(R.string.deleteTag));
                 builder.setCancelable(false);
+                builder.setCancelable(true);
                 builder.setPositiveButton(R.string.disagree, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -74,16 +74,16 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
                 }).setNegativeButton(R.string.agree, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        final String databaseName =  "MYTAGS";
+                        final String databaseName = "MYTAGS";
                         final String tableName = "MYTAGLIST";
                         DatabaseHelper helper;
                         SQLiteDatabase database;
 
-                        helper = new DatabaseHelper(v.getContext(), databaseName, null,3);
+                        helper = new DatabaseHelper(v.getContext(), databaseName, null, 3);
                         database = helper.getWritableDatabase();
                         helper.createTable(database, tableName);
 
-                        helper.deleteData(database,myViewHolder.textView.getText().toString());
+                        helper.deleteData(database, myViewHolder.textView.getText().toString());
                         MineSingleton mineSingleton = MineSingleton.getInstance();
                         FragmentTransaction fragmentTransaction = mineSingleton.adpterFragmentTransaction;
                         fragmentTransaction.detach(mainSingleton.mainActivity.mine).attach(mainSingleton.mainActivity.mine).commit();
@@ -106,24 +106,33 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
                 String str = "";
                 if (myViewHolder.checkBox.isChecked() == true) {
                     mainSingleton.bigLnearLayout.setVisibility(View.VISIBLE);
-                    globalVariable.addSelectedTags(temp);
-                    for(int i = 0 ; i < globalVariable.sizeSelectedTags() ; i++){
-                        str += globalVariable.getSelectedTags(i);
-                        mainSingleton.textView.setText(str);
+                    if (globalVariable.sizeSelectedTags() < 30) {
+                        globalVariable.addSelectedTags(temp);
+                        for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
+                            str += globalVariable.getSelectedTags(i);
+                            mainSingleton.textView.setText(str);
+                        }
+                        for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
+                            Log.d("mainSingleton.textView", globalVariable.getSelectedTags(i));
+                        }
+                    } else {
+                        MineSingleton mineSingleton = MineSingleton.getInstance();
+                        Toast.makeText(mineSingleton.mineContext, R.string.maxTag, Toast.LENGTH_SHORT).show();
                     }
-                    for(int i = 0 ; i < globalVariable.sizeSelectedTags() ; i++){
-                        Log.d("mainSingleton.textView", globalVariable.getSelectedTags(i));
-                    }
+
                 } else if (myViewHolder.checkBox.isChecked() == false) {
                     globalVariable.removeSelectedTags(temp);
-                    if(globalVariable.sizeSelectedTags() == 0){
+                    if (globalVariable.sizeSelectedTags() < 1) {
+                        mainSingleton.bigLnearLayout.setVisibility(View.GONE);
+                    }
+                    if (globalVariable.sizeSelectedTags() == 0) {
                         mainSingleton.textView.setText(null);
                     }
-                    for(int i = 0 ; i < globalVariable.sizeSelectedTags() ; i++){
+                    for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
                         str += globalVariable.getSelectedTags(i);
                         mainSingleton.textView.setText(str);
                     }
-                    for(int i = 0 ; i < globalVariable.sizeSelectedTags() ; i++){
+                    for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
                         Log.d("mainSingleton.textView", globalVariable.getSelectedTags(i));
                     }
                 }

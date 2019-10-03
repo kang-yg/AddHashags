@@ -1,5 +1,6 @@
 package com.AddHashtags.MyHashtags;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,7 +31,7 @@ public class Mine extends Fragment {
     DatabaseHelper helper;
     SQLiteDatabase database;
 
-    final String databaseName =  "MYTAGS";
+    final String databaseName = "MYTAGS";
     final String tableName = "MYTAGLIST";
 
     @Nullable
@@ -39,12 +40,14 @@ public class Mine extends Fragment {
 
         final View view = inflater.inflate(R.layout.mine, null);
 
+
         getAdapterFragmentTransaction();
+        setMineContext(getContext());
 
         mineEditText = view.findViewById(R.id.mine_editText);
         mineButton = view.findViewById(R.id.mine_button);
 
-        helper = new DatabaseHelper(getContext(), databaseName, null,3);
+        helper = new DatabaseHelper(getContext(), databaseName, null, 3);
         database = helper.getWritableDatabase();
         helper.createTable(database, tableName);
 
@@ -57,15 +60,15 @@ public class Mine extends Fragment {
             @Override
             public void onClick(View v) {
                 String temp = mineEditText.getText().toString().trim();
-                temp = temp.replaceAll(" ","");
+                temp = temp.replaceAll(" ", "");
 
-                if(!finalMyTagsName.contains(temp)){
+                if (!finalMyTagsName.contains(temp)) {
                     helper.insertData(database, temp);
                     mineEditText.setText("");
                     Toast.makeText(getContext(), getString(R.string.successInsert), Toast.LENGTH_SHORT).show();
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                     fragmentTransaction.detach(mainSingleton.mainActivity.mine).attach(mainSingleton.mainActivity.mine).commit();
-                }else {
+                } else {
                     mineEditText.setText("");
                     Toast.makeText(getContext(), getString(R.string.alreadyExist), Toast.LENGTH_SHORT).show();
                 }
@@ -79,7 +82,7 @@ public class Mine extends Fragment {
 
         ArrayList<MyTagsItem> myTagsItems = new ArrayList<>();
 
-        for(int i = 0 ; i<myTagsName.size() ; i++){
+        for (int i = 0; i < myTagsName.size(); i++) {
             myTagsItems.add(new MyTagsItem(myTagsName.get(i), false));
         }
 
@@ -90,9 +93,14 @@ public class Mine extends Fragment {
         return view;
     }
 
-    protected void getAdapterFragmentTransaction(){
+    protected void getAdapterFragmentTransaction() {
         MineSingleton mineSingleton = MineSingleton.getInstance();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         mineSingleton.adpterFragmentTransaction = fragmentTransaction;
+    }
+
+    protected void setMineContext(Context mineContext) {
+        MineSingleton mineSingleton = MineSingleton.getInstance();
+        mineSingleton.mineContext = mineContext;
     }
 }
