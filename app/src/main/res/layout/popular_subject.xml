@@ -15,16 +15,22 @@
         <Button
             android:id="@+id/popSubject_line01_item01"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
-            android:text="@string/top" />
+            android:background="@drawable/popular_subject_design"
+            android:text="@string/top"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/popSubject_line01_item02"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
-            android:text="@string/love" />
+            android:background="@drawable/popular_subject_design"
+            android:text="@string/love"
+            android:textSize="25dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,16 +45,22 @@
         <Button
             android:id="@+id/popSubject_line02_item01"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
-            android:text="@string/daily" />
+            android:background="@drawable/popular_subject_design"
+            android:text="@string/daily"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/popSubject_line02_item02"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
-            android:text="@string/photo" />
+            android:background="@drawable/popular_subject_design"
+            android:text="@string/photo"
+            android:textSize="25dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -63,16 +75,22 @@
         <Button
             android:id="@+id/popSubject_line03_item01"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
-            android:text="@string/food" />
+            android:background="@drawable/popular_subject_design"
+            android:text="@string/food"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/popSubject_line03_item02"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
-            android:text="@string/trip" />
+            android:background="@drawable/popular_subject_design"
+            android:text="@string/trip"
+            android:textSize="25dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </RelativeLayout>

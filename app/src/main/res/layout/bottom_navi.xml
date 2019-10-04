@@ -8,11 +8,13 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/navigation"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="match_parent"
         android:layout_gravity="end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/bottom_navi_menu" />
+        app:itemTextColor="#FFFFFF"
+        app:menu="@menu/bottom_navi_menu"
+        android:background="@drawable/bottom_navi_design"/>
 
 </android.support.constraint.ConstraintLayout>
