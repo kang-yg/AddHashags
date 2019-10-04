@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class SubjectRecyclerview extends Fragment {
+public class SubjectRecyclerview extends Fragment  {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 

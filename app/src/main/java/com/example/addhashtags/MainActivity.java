@@ -16,6 +16,8 @@ import com.AddHashtags.MyHashtags.Mine;
 import com.AddHashtags.PopularTags.PopularSubject;
 import com.AddHashtags.PopularTags.SubjectRecyclerview;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     public FragmentManager fragmentManager;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     BottomNaviFrame bottomNaviFrame;
     SubjectRecyclerview subjectRecyclerview;
     public Mine mine;
+
+    private long keyPressTime = 0;
 
     public static MainSingleton mainSingleton = MainSingleton.getInstance();
 
@@ -77,14 +81,16 @@ public class MainActivity extends AppCompatActivity {
                 //PopularSubject
                 Log.d("setFrag()", "0");
                 fragmentTransaction.replace(R.id.mainFrame, popularSubject);
+                fragmentManager.popBackStack();
+//                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
             case 1:
                 //Mine
                 Log.d("setFrag()", "1");
                 fragmentTransaction.replace(R.id.mainFrame, mine);
-                fragmentTransaction.commit();
                 fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
                 break;
         }
     }
@@ -97,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         bundle.putInt("num", n);
         subjectRecyclerview.setArguments(bundle);
         fragmentTransaction.replace(R.id.mainFrame, subjectRecyclerview);
-        fragmentTransaction.commit();
         fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

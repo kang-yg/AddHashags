@@ -23,6 +23,7 @@ import com.AddHashtags.MainSingleton;
 import com.example.addhashtags.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -106,9 +107,12 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
                 String str = "";
                 if (myViewHolder.checkBox.isChecked() == true) {
                     if (!globalVariable.getSelectedTags().contains(temp)) {
-                        mainSingleton.bigLnearLayout.setVisibility(View.VISIBLE);
                         if (globalVariable.sizeSelectedTags() < 30) {
+                            mainSingleton.bigLnearLayout.setVisibility(View.VISIBLE);
                             globalVariable.addSelectedTags(temp);
+                            for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
+                                Log.d("My_globalVariable", globalVariable.getSelectedTags(i));
+                            }
                             for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
                                 str += globalVariable.getSelectedTags(i);
                                 mainSingleton.textView.setText(str);
@@ -121,10 +125,10 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
                             MineSingleton mineSingleton = MineSingleton.getInstance();
                             Toast.makeText(mineSingleton.mineContext, R.string.maxTag, Toast.LENGTH_SHORT).show();
                         }
-                    }else {
+                    } else {
                         myViewHolder.checkBox.setChecked(true);
                         MineSingleton mineSingleton = MineSingleton.getInstance();
-                        Toast.makeText(mineSingleton.mineContext,  R.string.alreadySelectde, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mineSingleton.mineContext, R.string.alreadySelectde, Toast.LENGTH_SHORT).show();
                     }
 
 

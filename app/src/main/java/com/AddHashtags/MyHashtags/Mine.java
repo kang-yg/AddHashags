@@ -21,7 +21,7 @@ import com.example.addhashtags.R;
 
 import java.util.ArrayList;
 
-public class Mine extends Fragment {
+public class Mine extends Fragment  {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 

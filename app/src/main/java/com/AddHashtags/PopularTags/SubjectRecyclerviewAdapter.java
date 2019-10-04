@@ -20,6 +20,7 @@ import com.AddHashtags.MyHashtags.MineSingleton;
 import com.example.addhashtags.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -67,13 +68,16 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
         myViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                String temp = "#" + myViewHolder.textView.getText().toString();
+                String temp = "#" + myViewHolder.textView.getText().toString() + " ";
                 String str = "";
                 if (myViewHolder.checkBox.isChecked() == true) {
                     if (!globalVariable.getSelectedTags().contains(temp)) {
-                        if(globalVariable.sizeSelectedTags() < 30){
+                        if (globalVariable.sizeSelectedTags() < 30) {
                             mainSingleton.bigLnearLayout.setVisibility(View.VISIBLE);
                             globalVariable.addSelectedTags(temp);
+                            for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
+                                Log.d("Sub_globalVariable", globalVariable.getSelectedTags(i));
+                            }
                             for (int i = 0; i < globalVariable.sizeSelectedTags(); i++) {
                                 str += globalVariable.getSelectedTags(i);
                                 mainSingleton.textView.setText(str);

@@ -23,6 +23,10 @@ public class GlobalVariable {
         return selectedTags.get(index);
     }
 
+    public void setSelectedTags(ArrayList<String> arrayList){
+        this.selectedTags = arrayList;
+    }
+
     public void addSelectedTags(String str) {
         this.selectedTags.add(str);
     }
