@@ -17,6 +17,27 @@
     <string name="save">저장</string>
     <string name="editTextHint">저장할 태그명을 입력하세요(ex.사랑)</string>
 
+    <!-- Popular subjects Adapter -->
+    <string name="alreadySelectde">이미 선택된 태그입니다.</string>
+
+    <!-- MainActivity -->
+    <string name="copyDone">복사완료</string>
+    <string name="finish_title">종료</string>
+    <string name="finish_content">종료하시겠습니까?</string>
+    <string name="finish_disagree">취소</string>
+    <string name="finish_agree">확인</string>
+
+    <!-- Mine -->
+    <string name="alreadyExist">이미 저장된 태그입니다</string>
+    <string name="successInsert">저정 완료</string>
+
+    <!-- MyTagsRecyclerviewAdapter -->
+    <string name="deleteTag">태그를 삭제 하시겠습니까?</string>
+    <string name="disagree">취소</string>
+    <string name="agree">삭제</string>
+    <string name="deleteSuccess">삭제 완료</string>
+    <string name="maxTag">최대 태그의 개수는 30개 입니다.</string>
+
     <!-- Popular subjects -->
     <string name="top">TOP 100</string>
     <string name="love">사랑</string>
@@ -331,21 +352,4 @@
         <item>travelblogger</item>
         <item>traveler</item>
     </string-array>
-
-    <!-- Popular subjects Adapter -->
-    <string name="alreadySelectde">이미 선택된 태그입니다.</string>
-
-    <!-- MainActivity -->
-    <string name="copyDone">복사완료</string>
-
-    <!-- Mine -->
-    <string name="alreadyExist">이미 저장된 태그입니다</string>
-    <string name="successInsert">저정 완료</string>
-
-    <!-- MyTagsRecyclerviewAdapter -->
-    <string name="deleteTag">태그를 삭제 하시겠습니까?</string>
-    <string name="disagree">취소</string>
-    <string name="agree">삭제</string>
-    <string name="deleteSuccess">삭제 완료</string>
-    <string name="maxTag">최대 태그의 개수는 30개 입니다.</string>
 </resources>

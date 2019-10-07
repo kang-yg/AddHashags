@@ -38,4 +38,8 @@ public class GlobalVariable {
     public int sizeSelectedTags() {
         return selectedTags.size();
     }
+
+    public void clearSelectedTags(){
+        this.selectedTags.clear();
+    }
 }

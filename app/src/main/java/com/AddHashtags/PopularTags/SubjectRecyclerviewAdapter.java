@@ -134,16 +134,16 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
 //            }
 //        });
 
-        for (int i = 0; i < subjectItems.size(); i++) {
-            Log.d("SubjectRecyclerviewAdapter", "onBindViewHolder() : " + subjectItems.get(i).tagName);
-            Log.d("SubjectRecyclerviewAdapter", "onBindViewHolder() : " + subjectItems.get(i).check);
-        }
+//        for (int i = 0; i < subjectItems.size(); i++) {
+//            Log.d("SubjectRecyclerviewAdapter", "onBindViewHolder() : " + subjectItems.get(i).tagName);
+//            Log.d("SubjectRecyclerviewAdapter", "onBindViewHolder() : " + subjectItems.get(i).check);
+//        }
     }
 
     @Override
     public int getItemCount() {
-        Log.d("SubjectRecyclerviewAdapter", "getItemCount()");
-        Log.d("SubjectRecyclerviewAdapter", "getItemCount() : " + subjectItems.size());
+//        Log.d("SubjectRecyclerviewAdapter", "getItemCount()");
+//        Log.d("SubjectRecyclerviewAdapter", "getItemCount() : " + subjectItems.size());
         return subjectItems.size();
     }
 

@@ -1,7 +1,9 @@
 package com.example.addhashtags;
 
+import android.content.DialogInterface;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +18,6 @@ import com.AddHashtags.MyHashtags.Mine;
 import com.AddHashtags.PopularTags.PopularSubject;
 import com.AddHashtags.PopularTags.SubjectRecyclerview;
 
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,14 +30,49 @@ public class MainActivity extends AppCompatActivity {
     SubjectRecyclerview subjectRecyclerview;
     public Mine mine;
 
-    private long keyPressTime = 0;
-
     public static MainSingleton mainSingleton = MainSingleton.getInstance();
+
+    long pressBack = 0;
+
+    @Override
+    public void onBackPressed() {
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        if (System.currentTimeMillis() > pressBack + 1000) {
+            pressBack = System.currentTimeMillis();
+
+            fragmentTransaction.replace(R.id.mainFrame, popularSubject);
+            fragmentManager.popBackStack();
+            fragmentTransaction.commit();
+        }
+
+        else if (System.currentTimeMillis() <= pressBack + 1000) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.finish_title).setMessage(R.string.finish_content);
+            builder.setPositiveButton(R.string.finish_disagree, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            builder.setNegativeButton(R.string.finish_agree, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        GlobalVariable globalVariable = GlobalVariable.getInstance();
+        globalVariable.clearSelectedTags();
 
         mainSingleton.mainActivity = this;
         mainSingleton.bigLnearLayout = findViewById(R.id.big_linearVisibility);
@@ -89,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
                 //Mine
                 Log.d("setFrag()", "1");
                 fragmentTransaction.replace(R.id.mainFrame, mine);
-                fragmentTransaction.addToBackStack(null);
+                fragmentManager.popBackStack();
+//                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
         }
