@@ -29,6 +29,7 @@ public class SubjectRecyclerview extends Fragment  {
 
         SubjectRecyclerviewSingleton subjectRecyclerviewSingleton = SubjectRecyclerviewSingleton.getInstence();
         subjectRecyclerviewSingleton.subjectRecyclerviewSingletonContext = getContext();
+        subjectRecyclerviewSingleton.subjectRecyclerviewLayoutInflater = (LayoutInflater) getActivity().getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
 
         recyclerView = view.findViewById(R.id.sub_recyclerview);
         recyclerView.setHasFixedSize(true);
@@ -42,7 +43,7 @@ public class SubjectRecyclerview extends Fragment  {
 
         switch (getIndex){
             case 0:
-                List<String> TOPList = Arrays.asList(getResources().getStringArray(R.array.TOP100));
+                List<String> TOPList = Arrays.asList(getResources().getStringArray(R.array.hot));
                 for(int i = 0 ; i < TOPList.size() ; i++){
                     subjectItems.add(new SubjectItem(TOPList.get(i),false));
                 }

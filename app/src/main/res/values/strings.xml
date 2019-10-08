@@ -17,6 +17,10 @@
     <string name="save">저장</string>
     <string name="editTextHint">저장할 태그명을 입력하세요(ex.사랑)</string>
 
+    <!-- Popup Window -->
+    <string name="recommend_title">&lt;추천 해시태그&gt;</string>
+    <string name="recommend_copy">복사</string>
+
     <!-- Popular subjects Adapter -->
     <string name="alreadySelectde">이미 선택된 태그입니다.</string>
 
@@ -39,7 +43,7 @@
     <string name="maxTag">최대 태그의 개수는 30개 입니다.</string>
 
     <!-- Popular subjects -->
-    <string name="top">TOP 100</string>
+    <string name="hot">HOT</string>
     <string name="love">사랑</string>
     <string name="daily">일상</string>
     <string name="photo">사진</string>
@@ -47,9 +51,67 @@
     <string name="trip">여행</string>
 
     <!-- TOP100 -->
-    <string-array name="TOP100">
-        <item>오늘</item>
-        <item>내일</item>
+    <string-array name="hot">
+        <item>소통</item>
+        <item>일상스타그램</item>
+        <item>선팔하면맞팔</item>
+        <item>데일리그램</item>
+        <item>선팔</item>
+        <item>좋아요</item>
+        <item>데일리</item>
+        <item>인스타데일리</item>
+        <item>맞팔</item>
+        <item>일상</item>
+        <item>댓글</item>
+        <item>맛스타그램</item>
+        <item>먹방</item>
+        <item>인스타푸드</item>
+        <item>먹스타그램</item>
+        <item>오늘뭐먹지</item>
+        <item>먹방</item>
+        <item>야식스타그램</item>
+        <item>맛있당</item>
+        <item>요리</item>
+        <item>냠냠</item>
+        <item>여행</item>
+        <item>여행스타그램</item>
+        <item>여행사진</item>
+        <item>여행은언제나옳다</item>
+        <item>혼자여행</item>
+        <item>여행에미치다</item>
+        <item>여행어디까지가봤니</item>
+        <item>힐링여행</item>
+        <item>동행스타그램</item>
+        <item>혼여</item>
+        <item>여행중</item>
+        <item>여행지추천</item>
+        <item>사진</item>
+        <item>스냅</item>
+        <item>오늘의사진</item>
+        <item>사진스타그램</item>
+        <item>포토그래퍼</item>
+        <item>카메라</item>
+        <item>출사</item>
+        <item>셀카</item>
+        <item>미러리스</item>
+        <item>dslr</item>
+        <item>갬성사진</item>
+        <item>포토그램</item>
+        <item>감성사진</item>
+        <item>사진소통</item>
+        <item>갬성스타그램</item>
+        <item>사진취미</item>
+        <item>사진연습</item>
+        <item>찰칵</item>
+        <item>셀피</item>
+        <item>셀스타그램</item>
+        <item>오오티디</item>
+        <item>ootd</item>
+        <item>셀카</item>
+        <item>얼스타그램</item>
+        <item>인스타그램</item>
+        <item>맞팔환영</item>
+        <item>selfie</item>
     </string-array>
     <!-- 사랑 -->
     <string-array name="love">

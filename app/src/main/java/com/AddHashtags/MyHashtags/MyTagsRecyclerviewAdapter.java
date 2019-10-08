@@ -1,20 +1,30 @@
 package com.AddHashtags.MyHashtags;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewManager;
+import android.view.WindowManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +34,7 @@ import com.example.addhashtags.R;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -60,6 +71,33 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
         final MainSingleton mainSingleton = MainSingleton.getInstance();
 
         myViewHolder.textView.setText(myTagsItems.get(position).tagName);
+        myViewHolder.textView.setOnClickListener(new View.OnClickListener() {
+            MineSingleton mineSingleton = MineSingleton.getInstance();
+            PopupWindow popupWindow;
+            List<Integer> displaySize = getDisplaySize(mineSingleton.mineContext);
+            WebView webView;
+            WebSettings webSettings;
+            @Override
+            public void onClick(View v) {
+                View popView = mineSingleton.mineLayoutInflater.inflate(R.layout.popup_window, (ViewGroup)v.findViewById(R.id.window_layer));
+                popupWindow = new PopupWindow(popView, displaySize.get(0) - 100, displaySize.get(1) - 200, true);
+                popupWindow.showAtLocation(popView, Gravity.CENTER,0,0);
+                webView = (WebView)popView.findViewById(R.id.window_webview);
+                webView.setWebViewClient(new WebViewClient());
+                webSettings = webView.getSettings();
+                webSettings.setJavaScriptEnabled(true);
+                webSettings.setSupportMultipleWindows(false);
+                webSettings.setJavaScriptCanOpenWindowsAutomatically(false);
+                webSettings.setLoadWithOverviewMode(true);
+                webSettings.setUseWideViewPort(true);
+                webSettings.setSupportZoom(false);
+                webSettings.setBuiltInZoomControls(false);
+                webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+                webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+                webSettings.setDomStorageEnabled(true);
+                webView.loadUrl("https://www.instagram.com/explore/tags/" + myViewHolder.textView.getText().toString() + "/?hl=ko");
+            }
+        });
         myViewHolder.textView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View v) {
@@ -164,6 +202,20 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
 //                }
 //            }
 //        });
+    }
+
+    public List<Integer> getDisplaySize(Context context){
+        List<Integer> sizeList = new ArrayList<>();
+
+        WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if(Build.VERSION.SDK_INT > 14){
+            Point size = new Point();
+            display.getSize(size);
+            sizeList.add(0, size.x) ;
+            sizeList.add(1, size.y) ;
+        }
+        return sizeList;
     }
 
     @Override

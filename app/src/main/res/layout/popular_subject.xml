@@ -18,7 +18,7 @@
             android:layout_height="100dp"
             android:layout_weight="1"
             android:background="@drawable/popular_subject_design"
-            android:text="@string/top"
+            android:text="@string/hot"
             android:textSize="25dp"
             android:textStyle="bold" />
 

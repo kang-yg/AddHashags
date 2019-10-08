@@ -40,9 +40,9 @@ public class Mine extends Fragment  {
 
         final View view = inflater.inflate(R.layout.mine, null);
 
-
         getAdapterFragmentTransaction();
         setMineContext(getContext());
+        setMineLayoutInflater();
 
         mineEditText = view.findViewById(R.id.mine_editText);
         mineButton = view.findViewById(R.id.mine_button);
@@ -102,5 +102,10 @@ public class Mine extends Fragment  {
     protected void setMineContext(Context mineContext) {
         MineSingleton mineSingleton = MineSingleton.getInstance();
         mineSingleton.mineContext = mineContext;
+    }
+
+    protected void setMineLayoutInflater(){
+        MineSingleton mineSingleton = MineSingleton.getInstance();
+        mineSingleton.mineLayoutInflater = (LayoutInflater) getActivity().getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
     }
 }
