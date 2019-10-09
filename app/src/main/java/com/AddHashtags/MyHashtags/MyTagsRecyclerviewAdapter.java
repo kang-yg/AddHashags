@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -28,13 +29,16 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.AddHashtags.CopyTags;
 import com.AddHashtags.GlobalVariable;
 import com.AddHashtags.MainSingleton;
 import com.example.addhashtags.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 
 public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -77,12 +81,17 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
             List<Integer> displaySize = getDisplaySize(mineSingleton.mineContext);
             WebView webView;
             WebSettings webSettings;
+
+            TextView textView;
+            Button goBackButton;
+            Button recommendButton;
+
             @Override
             public void onClick(View v) {
-                View popView = mineSingleton.mineLayoutInflater.inflate(R.layout.popup_window, (ViewGroup)v.findViewById(R.id.window_layer));
+                View popView = mineSingleton.mineLayoutInflater.inflate(R.layout.popup_window, (ViewGroup) v.findViewById(R.id.window_layer));
                 popupWindow = new PopupWindow(popView, displaySize.get(0) - 100, displaySize.get(1) - 200, true);
-                popupWindow.showAtLocation(popView, Gravity.CENTER,0,0);
-                webView = (WebView)popView.findViewById(R.id.window_webview);
+                popupWindow.showAtLocation(popView, Gravity.CENTER, 0, 0);
+                webView = (WebView) popView.findViewById(R.id.window_webview);
                 webView.setWebViewClient(new WebViewClient());
                 webSettings = webView.getSettings();
                 webSettings.setJavaScriptEnabled(true);
@@ -96,8 +105,53 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
                 webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
                 webSettings.setDomStorageEnabled(true);
                 webView.loadUrl("https://www.instagram.com/explore/tags/" + myViewHolder.textView.getText().toString() + "/?hl=ko");
+
+                goBackButton = (Button) popView.findViewById(R.id.window_goback);
+                goBackButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        webView.loadUrl("https://www.instagram.com/explore/tags/" + myViewHolder.textView.getText().toString() + "/?hl=ko");
+                    }
+                });
+
+                textView = (TextView) popView.findViewById(R.id.window_recommend);
+                List<String> loveList = Arrays.asList(v.getResources().getStringArray(R.array.love));
+                List<String> dailyList = Arrays.asList(v.getResources().getStringArray(R.array.daily));
+                List<String> photoList = Arrays.asList(v.getResources().getStringArray(R.array.photo));
+                List<String> foodList = Arrays.asList(v.getResources().getStringArray(R.array.food));
+                List<String> tripList = Arrays.asList(v.getResources().getStringArray(R.array.trip));
+                Random random = new Random(System.currentTimeMillis());
+                if (loveList.contains(myViewHolder.textView.getText())) {
+                    textView.setText(recommendText(loveList, random));
+                } else if (dailyList.contains(myViewHolder.textView.getText())) {
+                    textView.setText(recommendText(dailyList, random));
+                } else if (photoList.contains(myViewHolder.textView.getText())) {
+                    textView.setText(recommendText(photoList, random));
+                } else if (foodList.contains(myViewHolder.textView.getText())) {
+                    textView.setText(recommendText(foodList, random));
+                } else if (tripList.contains(myViewHolder.textView.getText())) {
+                    textView.setText(recommendText(tripList, random));
+                } else {
+                    textView.setText(R.string.no_recommend);
+                }
+
+                recommendButton = (Button) popView.findViewById(R.id.window_recommend_copy);
+                recommendButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(!textView.getText().toString().equals(mineSingleton.mineContext.getResources().getString(R.string.no_recommend))){
+                            CopyTags copyTags = new CopyTags(textView.getText().toString());
+                            copyTags.copyTagsCilpboard();
+                            Toast.makeText(v.getContext(), R.string.copyDone, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(v.getContext(), R.string.enableCopy, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
+
+
         myViewHolder.textView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View v) {
@@ -204,16 +258,32 @@ public class MyTagsRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView
 //        });
     }
 
-    public List<Integer> getDisplaySize(Context context){
+    public String recommendText(List<String> list, Random random) {
+        String str = "";
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            if (!arrayList.contains(list.get(random.nextInt(list.size())))) {
+                arrayList.add(list.get(random.nextInt(list.size())));
+            }
+        }
+
+        for (int j = 0; j < arrayList.size(); j++) {
+            str += "#" + arrayList.get(j) + " ";
+        }
+
+        return str;
+    }
+
+    public List<Integer> getDisplaySize(Context context) {
         List<Integer> sizeList = new ArrayList<>();
 
-        WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
-        if(Build.VERSION.SDK_INT > 14){
+        if (Build.VERSION.SDK_INT > 14) {
             Point size = new Point();
             display.getSize(size);
-            sizeList.add(0, size.x) ;
-            sizeList.add(1, size.y) ;
+            sizeList.add(0, size.x);
+            sizeList.add(1, size.y);
         }
         return sizeList;
     }

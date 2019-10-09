@@ -1,6 +1,7 @@
 package com.AddHashtags.PopularTags;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Build;
@@ -22,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,7 +83,7 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
 
             @Override
             public void onClick(View v) {
-                View popView = subjectRecyclerviewSingleton.subjectRecyclerviewLayoutInflater.inflate(R.layout.popup_window, (ViewGroup) v.findViewById(R.id.window_layer));
+                final View popView = subjectRecyclerviewSingleton.subjectRecyclerviewLayoutInflater.inflate(R.layout.popup_window, (ViewGroup) v.findViewById(R.id.window_layer));
                 popupWindow = new PopupWindow(popView, displaySize.get(0) - 100, displaySize.get(1) - 200, true);
                 popupWindow.showAtLocation(popView, Gravity.CENTER, 0, 0);
                 webView = (WebView) popView.findViewById(R.id.window_webview);
@@ -124,15 +126,21 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
                     textView.setText(recommendText(foodList, random));
                 } else if (tripList.contains(myViewHolder.textView.getText())) {
                     textView.setText(recommendText(tripList, random));
+                }else {
+                    textView.setText(R.string.no_recommend);
                 }
 
                 recommendButton = (Button) popView.findViewById(R.id.window_recommend_copy);
                 recommendButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        CopyTags copyTags = new CopyTags(textView.getText().toString());
-                        copyTags.copyTagsCilpboard();
-                        Toast.makeText(v.getContext(), R.string.copyDone, Toast.LENGTH_SHORT).show();
+                        if(!textView.getText().toString().equals(subjectRecyclerviewSingleton.subjectRecyclerviewSingletonContext.getResources().getString(R.string.no_recommend))){
+                            CopyTags copyTags = new CopyTags(textView.getText().toString());
+                            copyTags.copyTagsCilpboard();
+                            Toast.makeText(v.getContext(), R.string.copyDone, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(v.getContext(), R.string.enableCopy, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }
