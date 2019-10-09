@@ -1,13 +1,12 @@
 package com.example.addhashtags;
 
 import android.content.DialogInterface;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,6 +17,9 @@ import com.AddHashtags.MainSingleton;
 import com.AddHashtags.MyHashtags.Mine;
 import com.AddHashtags.PopularTags.PopularSubject;
 import com.AddHashtags.PopularTags.SubjectRecyclerview;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     BottomNaviFrame bottomNaviFrame;
     SubjectRecyclerview subjectRecyclerview;
     public Mine mine;
+
+    //adMob
+    private AdView mAdView;
 
     public static MainSingleton mainSingleton = MainSingleton.getInstance();
 
@@ -45,9 +50,7 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.mainFrame, popularSubject);
             fragmentManager.popBackStack();
             fragmentTransaction.commit();
-        }
-
-        else if (System.currentTimeMillis() <= pressBack + 1000) {
+        } else if (System.currentTimeMillis() <= pressBack + 1000) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.finish_title).setMessage(R.string.finish_content);
             builder.setPositiveButton(R.string.finish_disagree, new DialogInterface.OnClickListener() {
@@ -71,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         GlobalVariable globalVariable = GlobalVariable.getInstance();
         globalVariable.clearSelectedTags();

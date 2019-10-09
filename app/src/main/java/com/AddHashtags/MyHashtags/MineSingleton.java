@@ -1,7 +1,7 @@
 package com.AddHashtags.MyHashtags;
 
 import android.content.Context;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 
 public class MineSingleton {
