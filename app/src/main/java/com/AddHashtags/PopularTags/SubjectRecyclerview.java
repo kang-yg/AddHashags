@@ -43,9 +43,9 @@ public class SubjectRecyclerview extends Fragment  {
 
         switch (getIndex){
             case 0:
-                List<String> TOPList = Arrays.asList(getResources().getStringArray(R.array.hot));
-                for(int i = 0 ; i < TOPList.size() ; i++){
-                    subjectItems.add(new SubjectItem(TOPList.get(i),false));
+                List<String> HOTList = Arrays.asList(getResources().getStringArray(R.array.hot));
+                for(int i = 0 ; i < HOTList.size() ; i++){
+                    subjectItems.add(new SubjectItem(HOTList.get(i),false));
                 }
                 break;
             case 1:

@@ -20,6 +20,7 @@
     <!-- Popup Window -->
     <string name="recommend_title">&lt;추천 해시태그&gt;</string>
     <string name="recommend_copy">복사</string>
+    <string name="goBack">뒤로가기</string>
 
     <!-- Popular subjects Adapter -->
     <string name="alreadySelectde">이미 선택된 태그입니다.</string>
