@@ -28,7 +28,7 @@ import android.widget.Toast;
 import com.AddHashtags.CopyTags;
 import com.AddHashtags.GlobalVariable;
 import com.AddHashtags.MainSingleton;
-import com.example.addhashtags.R;
+import com.example.common.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,7 +63,7 @@ public class SubjectRecyclerviewAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         final MyViewHolder myViewHolder = (MyViewHolder) holder;
         final TextView[] temp = new TextView[1];
 

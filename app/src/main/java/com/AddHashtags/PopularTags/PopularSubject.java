@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.AddHashtags.MainSingleton;
-import com.example.addhashtags.R;
+import com.example.common.R;
 
 public class PopularSubject extends Fragment  {
     Button button01, button02, button03, button04, button05, button06;

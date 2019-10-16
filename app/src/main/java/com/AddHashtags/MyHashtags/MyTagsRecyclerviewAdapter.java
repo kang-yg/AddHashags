@@ -32,7 +32,7 @@ import android.widget.Toast;
 import com.AddHashtags.CopyTags;
 import com.AddHashtags.GlobalVariable;
 import com.AddHashtags.MainSingleton;
-import com.example.addhashtags.R;
+import com.example.common.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

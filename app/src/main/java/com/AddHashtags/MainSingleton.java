@@ -1,13 +1,10 @@
 package com.AddHashtags;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.example.addhashtags.MainActivity;
+import com.example.common.MainActivity;
 
 public class MainSingleton {
     private static MainSingleton instance;

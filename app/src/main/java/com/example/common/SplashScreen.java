@@ -1,4 +1,4 @@
-package com.example.addhashtags;
+package com.example.common;
 
 import android.content.Intent;
 import android.os.Bundle;

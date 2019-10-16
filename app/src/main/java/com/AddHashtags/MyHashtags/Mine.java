@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.AddHashtags.MainSingleton;
-import com.example.addhashtags.R;
+import com.example.common.R;
 
 import java.util.ArrayList;
 
@@ -65,6 +66,8 @@ public class Mine extends Fragment  {
                 if (!finalMyTagsName.contains(temp)) {
                     helper.insertData(database, temp);
                     mineEditText.setText("");
+                    InputMethodManager inputMethodManager = (InputMethodManager)mainSingleton.mainActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     Toast.makeText(getContext(), getString(R.string.successInsert), Toast.LENGTH_SHORT).show();
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                     fragmentTransaction.detach(mainSingleton.mainActivity.mine).attach(mainSingleton.mainActivity.mine).commit();

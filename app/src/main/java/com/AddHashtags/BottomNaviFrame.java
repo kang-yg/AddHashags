@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.addhashtags.R;
+import com.example.common.R;
 
 public class BottomNaviFrame extends Fragment {
     BottomNavigationView bottomNavigationView;

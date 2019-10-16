@@ -1,4 +1,4 @@
-package com.example.addhashtags;
+package com.example.common;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;
