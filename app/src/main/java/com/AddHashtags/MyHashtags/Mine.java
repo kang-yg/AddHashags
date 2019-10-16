@@ -3,12 +3,14 @@ package com.AddHashtags.MyHashtags;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,7 @@ import com.example.common.R;
 
 import java.util.ArrayList;
 
-public class Mine extends Fragment  {
+public class Mine extends Fragment {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
@@ -63,10 +65,10 @@ public class Mine extends Fragment  {
                 String temp = mineEditText.getText().toString().trim();
                 temp = temp.replaceAll(" ", "");
 
-                if (!finalMyTagsName.contains(temp)) {
+                if (!finalMyTagsName.contains(temp) && !temp.equals("")) {
                     helper.insertData(database, temp);
                     mineEditText.setText("");
-                    InputMethodManager inputMethodManager = (InputMethodManager)mainSingleton.mainActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager inputMethodManager = (InputMethodManager) mainSingleton.mainActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     Toast.makeText(getContext(), getString(R.string.successInsert), Toast.LENGTH_SHORT).show();
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -107,7 +109,7 @@ public class Mine extends Fragment  {
         mineSingleton.mineContext = mineContext;
     }
 
-    protected void setMineLayoutInflater(){
+    protected void setMineLayoutInflater() {
         MineSingleton mineSingleton = MineSingleton.getInstance();
         mineSingleton.mineLayoutInflater = (LayoutInflater) getActivity().getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
     }
