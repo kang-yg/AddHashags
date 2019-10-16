@@ -2,6 +2,7 @@
 
 * popular tag들은 Eclipse에서 Crawling하여 추가함.
 
+![구글플레이 Tag](https://user-images.githubusercontent.com/38394861/66915104-32fe7700-f053-11e9-8297-99d816ea9ef3.png)
 ![스플래시 화면(github)](https://user-images.githubusercontent.com/38394861/66915014-ffbbe800-f052-11e9-87cc-26be0222d9c1.jpg)
 ![인기태그 선택(github)](https://user-images.githubusercontent.com/38394861/66915015-ffbbe800-f052-11e9-89bb-0bcc326ffc3d.jpg)
 ![KakaoTalk_20191009_231152476_05(github)](https://user-images.githubusercontent.com/38394861/66915016-ffbbe800-f052-11e9-8905-fc1bf881caf1.jpg)
