@@ -26,7 +26,7 @@ class MyTagListAdapter : RecyclerView.Adapter<MyTagListAdapter.MyTagViewHolder>(
         holder.itemBinding.myTagItemChipGroup.removeAllViews()
         tagItemList.apply {
             holder.itemBinding.myTagItem = this.value?.get(position) ?: MyTagItem("Dummy", "NONE")
-            val splitItemTags = this.value?.get(position)?.itemTags?.split(" ")
+            val splitItemTags = this.value?.get(position)?.item_tags?.split(" ")
             // TODO 안드로이드 버전에 따른 Chip 설정 변경
             if (splitItemTags != null) {
                 for (element in splitItemTags) {

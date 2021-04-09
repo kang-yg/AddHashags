@@ -27,7 +27,6 @@
                 android:layout_height="0dp"
                 android:gravity="center|start"
                 android:padding="10dp"
-                android:text="@{myTagItem.itemTitle}"
                 app:layout_constraintBottom_toTopOf="@id/myTagItemChipGroup"
                 app:layout_constraintDimensionRatio="8"
                 app:layout_constraintEnd_toEndOf="parent"

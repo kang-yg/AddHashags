@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.tagplus.addhashtags.AppDatabase
 import com.tagplus.addhashtags.viewmodel.FragmentMineTagListViewModel
 
-class FragmentMineTagListViewModelFactory(val database: AppDatabase) : ViewModelProvider.Factory {
+class FragmentMineTagListViewModelFactory(private val dataBase: AppDatabase) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return FragmentMineTagListViewModel(database) as T
+        return FragmentMineTagListViewModel(dataBase) as T
     }
 }
