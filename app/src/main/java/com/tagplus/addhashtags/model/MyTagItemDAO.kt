@@ -10,7 +10,7 @@ import io.reactivex.Single
 @Dao
 interface MyTagItemDAO {
     @Query("SELECT * FROM MyTagItem")
-    fun gatAllItems(): Single<List<MyTagItem>>
+    fun gatAllItems(): List<MyTagItem>
 
     @Query("SELECT item_title FROM MyTagItem")
     fun getALLItemTitle(): String
@@ -19,5 +19,5 @@ interface MyTagItemDAO {
     fun getALLItemTags(): String
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMyTagItem(myTagItem: MyTagItem): Completable
+    fun insertMyTagItem(myTagItem: MyTagItem)
 }

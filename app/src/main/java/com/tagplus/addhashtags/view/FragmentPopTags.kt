@@ -15,8 +15,6 @@ class FragmentPopTags : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentPopBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_pop, container, false)
 
-
-
         return fragmentPopBinding.root
     }
 }

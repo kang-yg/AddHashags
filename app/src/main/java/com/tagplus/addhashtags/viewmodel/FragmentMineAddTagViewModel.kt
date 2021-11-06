@@ -3,7 +3,6 @@ package com.tagplus.addhashtags.viewmodel
 import androidx.lifecycle.ViewModel
 import com.tagplus.addhashtags.AppDatabase
 import com.tagplus.addhashtags.model.MyTagItem
-import io.reactivex.schedulers.Schedulers
 
 class FragmentMineAddTagViewModel(private val database: AppDatabase) : ViewModel() {
     fun addTagData(title: String, content: String) {
@@ -12,6 +11,6 @@ class FragmentMineAddTagViewModel(private val database: AppDatabase) : ViewModel
             if (!it.startsWith("#")) "#".plus(it) else it
         }
         val contentToString = array.joinToString(separator = " ")
-        database.myTagItemDAO().insertMyTagItem(MyTagItem(title, contentToString)).subscribeOn(Schedulers.io()).subscribe()
+        database.myTagItemDAO().insertMyTagItem(MyTagItem(title, contentToString))
     }
 }

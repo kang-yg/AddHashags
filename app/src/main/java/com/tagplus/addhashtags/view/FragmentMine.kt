@@ -11,14 +11,21 @@ import com.tagplus.addhashtags.databinding.FragmentMineBinding
 
 class FragmentMine : Fragment() {
     lateinit var fragmentMineBinding: FragmentMineBinding
+    private val mineFrame by lazy {
+        fragmentMineBinding.mineFrame
+    }
+    private val fragmentManager by lazy {
+        requireFragmentManager().beginTransaction()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentMineBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mine, container, false)
-        val mineFrame = fragmentMineBinding.mineFrame
-
-        val fragmentManager = requireFragmentManager().beginTransaction()
-        fragmentManager.replace(mineFrame.id, FragmentMineTagList()).commit()
 
         return fragmentMineBinding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        fragmentManager.replace(mineFrame.id, FragmentMineTagList()).commit()
     }
 }
