@@ -14,9 +14,6 @@ class FragmentMine : Fragment() {
     private val mineFrame by lazy {
         fragmentMineBinding.mineFrame
     }
-    private val fragmentManager by lazy {
-        requireFragmentManager().beginTransaction()
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentMineBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mine, container, false)
@@ -26,6 +23,6 @@ class FragmentMine : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        fragmentManager.replace(mineFrame.id, FragmentMineTagList()).commit()
+        activity?.supportFragmentManager?.beginTransaction()?.replace(mineFrame.id, FragmentMineTagList())?.commit()
     }
 }

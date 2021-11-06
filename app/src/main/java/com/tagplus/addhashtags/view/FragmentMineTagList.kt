@@ -1,25 +1,23 @@
 package com.tagplus.addhashtags.view
 
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.tagplus.addhashtags.AppDatabase
+import com.tagplus.addhashtags.Common
 import com.tagplus.addhashtags.R
 import com.tagplus.addhashtags.databinding.FragmentMineTaglistBinding
-import com.tagplus.addhashtags.model.MyTagItem
 import com.tagplus.addhashtags.view.adapter.MyTagListAdapter
-import com.tagplus.addhashtags.view.viewmodelfactory.ActivityMainViewModelFactory
 import com.tagplus.addhashtags.view.viewmodelfactory.FragmentMineTagListViewModelFactory
-import com.tagplus.addhashtags.viewmodel.ActivityMainViewModel
 import com.tagplus.addhashtags.viewmodel.FragmentMineTagListViewModel
 
 class FragmentMineTagList : Fragment() {
@@ -33,12 +31,18 @@ class FragmentMineTagList : Fragment() {
         fragmentMineTagListBinding.mineRecyclerView
     }
     private val myTagListAdapter: MyTagListAdapter by lazy {
-        MyTagListAdapter()
+        MyTagListAdapter(fragmentMineTagListViewModel.getClipLiveData())
+    }
+    private val copyButton by lazy {
+        fragmentMineTagListBinding.btCopy
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentMineTagListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mine_taglist, container, false)
         fragmentMineTagListViewModel = ViewModelProvider(this, FragmentMineTagListViewModelFactory(db)).get(FragmentMineTagListViewModel::class.java)
+        fragmentMineTagListViewModel.getClipLiveData().observe(this, {
+            setCopyButtonVisible()
+        })
 
         return fragmentMineTagListBinding.root
     }
@@ -78,5 +82,17 @@ class FragmentMineTagList : Fragment() {
         val fragmentManager = requireFragmentManager().beginTransaction()
         fragmentManager.replace(mineTagListFrame.id, FragmentMineAddTag()).commitAllowingStateLoss()
         fragmentManager.addToBackStack(null)
+    }
+
+    private fun setCopyButtonVisible() {
+        when (fragmentMineTagListViewModel.getClipLiveData().value?.isEmpty()) {
+            true -> copyButton.visibility = View.GONE
+            false -> copyButton.visibility = View.VISIBLE
+        }
+    }
+
+    fun copyButtonClick() {
+        fragmentMineTagListViewModel.copyHashTags(activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
+        Common.showToast(requireContext(), getString(R.string.copied_success))
     }
 }

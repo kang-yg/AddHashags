@@ -2,6 +2,8 @@ package com.tagplus.addhashtags.view
 
 import android.app.Activity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,11 +23,14 @@ class FragmentMineAddTag : Fragment() {
     private lateinit var fragmentMineBinding: FragmentMineBinding
     private lateinit var fragmentMineAddTagBinding: FragmentMineAddtagBinding
     private lateinit var fragmentMineAddTagViewModel: FragmentMineAddTagViewModel
+    private val etTagTitle by lazy {
+        fragmentMineAddTagBinding.tagContentTitleEdit
+    }
+    val btTagSubmit by lazy {
+        fragmentMineAddTagBinding.addTagSubmit
+    }
     private val db: AppDatabase by lazy {
         Room.databaseBuilder(requireContext(), AppDatabase::class.java, "AddHashTags").build()
-    }
-    private val fragmentManager by lazy {
-        activity?.supportFragmentManager?.beginTransaction()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,6 +47,11 @@ class FragmentMineAddTag : Fragment() {
         initFragmentMineAddTagConstraintLayout()
     }
 
+    override fun onResume() {
+        super.onResume()
+        checkEtTitle()
+    }
+
     private fun initDataToLayout() {
         fragmentMineAddTagBinding.fragmentAddTag = this
     }
@@ -55,19 +65,35 @@ class FragmentMineAddTag : Fragment() {
         }
     }
 
+    private fun checkEtTitle() {
+        btTagSubmit.isEnabled = false
+
+        etTagTitle.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                btTagSubmit.isEnabled = !s.isNullOrBlank()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+    }
+
     fun submit() {
         val title = fragmentMineAddTagBinding.tagContentTitleEdit.text.toString()
         val content = fragmentMineAddTagBinding.tagContentEdit.text.toString()
         Thread(Runnable {
             fragmentMineAddTagViewModel.addTagData(title, content).run {
                 activity?.runOnUiThread {
-                    fragmentManager?.replace(fragmentMineBinding.mineFrame.id, FragmentMineTagList())?.commit()
+                    activity?.supportFragmentManager?.beginTransaction()?.replace(fragmentMineBinding.mineFrame.id, FragmentMineTagList())?.commit()
                 }
             }
         }).start()
     }
 
     fun back() {
-        activity?.supportFragmentManager?.popBackStack()
+        activity?.supportFragmentManager?.beginTransaction()?.detach(this)?.commit()
     }
 }

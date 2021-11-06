@@ -17,7 +17,7 @@ class ActivityMain : AppCompatActivity() {
     private lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var activityMainViewModel: ActivityMainViewModel
 
-    val db: AppDatabase by lazy {
+    private val db: AppDatabase by lazy {
         Room.databaseBuilder(this, AppDatabase::class.java, "AddHashTags").build()
     }
     var tabList = arrayListOf<String>()

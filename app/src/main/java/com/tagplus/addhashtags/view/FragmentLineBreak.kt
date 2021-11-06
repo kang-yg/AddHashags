@@ -3,7 +3,6 @@ package com.tagplus.addhashtags.view
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ class FragmentLineBreak : Fragment() {
 
 //            val clip: ClipData = ClipData.newPlainText("text", "")
 //            myClipboard.setPrimaryClip(clip)
-            Toast.makeText(activity, "복사완료", Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, "복사완료", Toast.LENGTH_SHORT).show()
 
         return super.onCreateView(inflater, container, savedInstanceState)
     }

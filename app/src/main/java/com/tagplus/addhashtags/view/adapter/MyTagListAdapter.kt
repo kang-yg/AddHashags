@@ -3,6 +3,7 @@ package com.tagplus.addhashtags.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,8 +12,10 @@ import com.tagplus.addhashtags.R
 import com.tagplus.addhashtags.databinding.MytagItemBinding
 import com.tagplus.addhashtags.model.MyTagItem
 
-class MyTagListAdapter : ListAdapter<MyTagItem, MyTagListAdapter.MyTagViewHolder>(diffUtil) {
-    inner class MyTagViewHolder(val itemBinding: MytagItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+class MyTagListAdapter(var clipLiveData: MutableLiveData<MutableList<String>>) : ListAdapter<MyTagItem, MyTagListAdapter.MyTagViewHolder>(diffUtil) {
+    val clipDataList: ArrayList<String> = arrayListOf()
+
+    inner class MyTagViewHolder(private val itemBinding: MytagItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(myTagItem: MyTagItem) {
             itemBinding.myTagItemTitle.text = myTagItem.item_title
             splitTags(myTagItem.item_tags)
@@ -41,10 +44,14 @@ class MyTagListAdapter : ListAdapter<MyTagItem, MyTagListAdapter.MyTagViewHolder
                     if (isChecked) {
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                             chip.chipBackgroundColor = itemBinding.myTagItemChipGroup.context.getColorStateList(R.color.MistyRose05)
+                            clipDataList.add(tag)
+                            clipLiveData.postValue(clipDataList)
                         }
                     } else {
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                             chip.chipBackgroundColor = itemBinding.myTagItemChipGroup.context.getColorStateList(R.color.MistyRose01)
+                            clipDataList.remove(tag)
+                            clipLiveData.postValue(clipDataList)
                         }
                     }
                 }

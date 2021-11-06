@@ -12,49 +12,13 @@
     <string name="input_tag_submit">추가하기</string>
     <string name="input_tag_back">뒤로가기</string>
 
+    <string name="copy">복사</string>
+    <string name="copied_success">클립보드에 복사되었습니다.</string>
+
 
     <!-- BottomNavi -->
     <string name="popularTags">POP</string>
     <string name="myTags">MINE</string>
-
-    <!-- AddTags.xml -->
-    <string name="addMyTags_edit">addMyTags_edit</string>
-    <string name="addMyTags_button">addMyTags_button</string>
-
-    <!-- AddTags.xml -->
-    <string name="copy">복사</string>
-
-    <!-- mine.xml -->
-    <string name="save">저장</string>
-    <string name="editTextHint">저장할 태그명을 입력하세요(ex.사랑)</string>
-
-    <!-- Popup Window -->
-    <string name="recommend_title">&lt;추천 해시태그&gt;</string>
-    <string name="recommend_copy">복사</string>
-    <string name="goBack">뒤로가기</string>
-    <string name="no_recommend">추천할 태그가 없습니다.</string>
-    <string name="enableCopy">복사할 태그가 없습니다</string>
-
-    <!-- Popular subjects Adapter -->
-    <string name="alreadySelectde">이미 선택된 태그입니다.</string>
-
-    <!-- MainActivity -->
-    <string name="copyDone">복사완료</string>
-    <string name="finish_title">종료</string>
-    <string name="finish_content">종료하시겠습니까?</string>
-    <string name="finish_disagree">취소</string>
-    <string name="finish_agree">확인</string>
-
-    <!-- Mine -->
-    <string name="alreadyExist">이미 저장된 태그입니다</string>
-    <string name="successInsert">저정 완료</string>
-
-    <!-- MyTagsRecyclerviewAdapter -->
-    <string name="deleteTag">태그를 삭제 하시겠습니까?</string>
-    <string name="disagree">취소</string>
-    <string name="agree">삭제</string>
-    <string name="deleteSuccess">삭제 완료</string>
-    <string name="maxTag">최대 태그의 개수는 30개 입니다.</string>
 
     <!-- Popular subjects -->
     <string name="hot">HOT</string>

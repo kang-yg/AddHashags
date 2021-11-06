@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="fragmentMineTagList"
             type="com.tagplus.addhashtags.view.FragmentMineTagList" />
@@ -33,11 +34,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                android:onClick="@{() -> fragmentMineTagList.floatingButtonClick()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:onClick="@{() -> fragmentMineTagList.floatingButtonClick()}"
                 app:srcCompat="@drawable/plus" />
 
+            <Button
+                android:id="@+id/btCopy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:onClick="@{() -> fragmentMineTagList.copyButtonClick()}"
+                android:text="@string/copy"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </layout>
