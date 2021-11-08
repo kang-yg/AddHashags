@@ -40,9 +40,9 @@ class FragmentMineTagList : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentMineTagListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mine_taglist, container, false)
         fragmentMineTagListViewModel = ViewModelProvider(this, FragmentMineTagListViewModelFactory(db)).get(FragmentMineTagListViewModel::class.java)
-        fragmentMineTagListViewModel.getClipLiveData().observe(this, {
+/*        fragmentMineTagListViewModel.getClipLiveData().observe(this, {
             setCopyButtonVisible()
-        })
+        })*/
 
         return fragmentMineTagListBinding.root
     }
@@ -62,6 +62,7 @@ class FragmentMineTagList : Fragment() {
         fragmentMineTagListBinding.fragmentMineTagList = this
     }
 
+    // TODO RecyclerView.ItemDecoration 적용
     private fun setRecyclerView() {
         mineTagListRecyclerView.layoutManager = LinearLayoutManager(context)
         mineTagListRecyclerView.adapter = myTagListAdapter

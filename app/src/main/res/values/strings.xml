@@ -12,7 +12,8 @@
     <string name="input_tag_submit">추가하기</string>
     <string name="input_tag_back">뒤로가기</string>
 
-    <string name="copy">복사</string>
+    <string name="tag_copy">복사</string>
+    <string name="tag_remove">삭제</string>
     <string name="copied_success">클립보드에 복사되었습니다.</string>
 
 

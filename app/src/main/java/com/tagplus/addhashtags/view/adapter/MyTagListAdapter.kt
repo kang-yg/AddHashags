@@ -18,21 +18,24 @@ class MyTagListAdapter(var clipLiveData: MutableLiveData<MutableList<String>>) :
     inner class MyTagViewHolder(private val itemBinding: MytagItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(myTagItem: MyTagItem) {
             itemBinding.myTagItemTitle.text = myTagItem.item_title
-            splitTags(myTagItem.item_tags)
+            attachChips(myTagItem.item_tags)
         }
 
-        private fun splitTags(tags: String) {
-            val splitTags = tags.split(" ")
+        private fun attachChips(tags: String) {
             itemBinding.myTagItemChipGroup.removeAllViews()
+
+            val splitTags = tags.split(" ")
             splitTags.forEach { tag ->
-                itemBinding.myTagItemChipGroup.addView(createChips(tag))
+                if (tag != "#") {
+                    itemBinding.myTagItemChipGroup.addView(createChips(tag))
+                }
             }
         }
 
         private fun createChips(tag: String): Chip {
             return Chip(itemBinding.myTagItemChipGroup.context).also { chip ->
                 chip.id = View.generateViewId()
-                chip.isCheckable = true
+                chip.isCheckable = false
                 chip.isCheckedIconVisible = false
                 chip.text = tag
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -40,7 +43,7 @@ class MyTagListAdapter(var clipLiveData: MutableLiveData<MutableList<String>>) :
                 } else {
                     chip.isCheckedIconVisible = true
                 }
-                chip.setOnCheckedChangeListener { _, isChecked ->
+/*                chip.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) {
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                             chip.chipBackgroundColor = itemBinding.myTagItemChipGroup.context.getColorStateList(R.color.MistyRose05)
@@ -54,7 +57,7 @@ class MyTagListAdapter(var clipLiveData: MutableLiveData<MutableList<String>>) :
                             clipLiveData.postValue(clipDataList)
                         }
                     }
-                }
+                }*/
             }
         }
     }
