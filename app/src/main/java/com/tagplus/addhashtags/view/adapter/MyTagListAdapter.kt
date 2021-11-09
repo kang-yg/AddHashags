@@ -11,7 +11,7 @@ import com.tagplus.addhashtags.R
 import com.tagplus.addhashtags.databinding.MytagItemBinding
 import com.tagplus.addhashtags.model.MyTagItem
 
-class MyTagListAdapter(private var clipData: ArrayList<String>, val copyEvent: (MyTagItem) -> Unit) : ListAdapter<MyTagItem, MyTagListAdapter.MyTagViewHolder>(diffUtil) {
+class MyTagListAdapter(private var clipData: ArrayList<String>, private val copyEvent: () -> Unit, private val removeEvent: (MyTagItem) -> Unit) : ListAdapter<MyTagItem, MyTagListAdapter.MyTagViewHolder>(diffUtil) {
     inner class MyTagViewHolder(private val itemBinding: MytagItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(myTagItem: MyTagItem) {
             itemBinding.myTagItemTitle.text = myTagItem.item_title
@@ -19,6 +19,7 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, val copyEvent: (
             cardViewClickEvent()
             myTagItemOptionConstraintLayoutClickEvent()
             copyButtonEvent(myTagItem)
+            removeButtonEvent(myTagItem)
         }
 
         private fun cardViewClickEvent() {
@@ -34,15 +35,21 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, val copyEvent: (
         }
 
         private fun copyButtonEvent(myTagItem: MyTagItem) {
-            clipData.clear()
             itemBinding.myTagItemCopyBt.setOnClickListener {
+                clipData.clear()
                 val splitTags = myTagItem.item_tags.split(" ")
                 splitTags.forEach { tag ->
                     if (tag != "#") {
                         clipData.add(tag)
                     }
                 }
-                copyEvent(myTagItem)
+                copyEvent()
+            }
+        }
+
+        private fun removeButtonEvent(myTagItem: MyTagItem) {
+            itemBinding.myTagItemRemoveBt.setOnClickListener {
+                removeEvent(myTagItem)
             }
         }
 

@@ -1,11 +1,6 @@
 package com.tagplus.addhashtags.model
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import io.reactivex.Completable
-import io.reactivex.Single
+import androidx.room.*
 
 @Dao
 interface MyTagItemDAO {
@@ -20,4 +15,7 @@ interface MyTagItemDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMyTagItem(myTagItem: MyTagItem)
+
+    @Delete
+    fun deleteItem(myTagItem: MyTagItem)
 }

@@ -31,6 +31,10 @@ class FragmentMineTagListViewModel(private val database: AppDatabase) : ViewMode
         }.toString()
     }
 
+    fun deleteTagData(myTagItem: MyTagItem) {
+        database.myTagItemDAO().deleteItem(myTagItem)
+    }
+
     companion object {
         private const val COPIED_HASHTAGS = "Copied hashtags"
     }

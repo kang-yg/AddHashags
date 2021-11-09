@@ -32,7 +32,7 @@ class FragmentMineTagList : Fragment() {
         fragmentMineTagListBinding.mineRecyclerView
     }
     private val myTagListAdapter: MyTagListAdapter by lazy {
-        MyTagListAdapter(fragmentMineTagListViewModel.getClipDataList(), copyEvent = copyButtonClick())
+        MyTagListAdapter(fragmentMineTagListViewModel.getClipDataList(), copyEvent = copyButtonClick(), removeEvent = removeButtonClick())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -80,8 +80,16 @@ class FragmentMineTagList : Fragment() {
         fragmentManager.addToBackStack(null)
     }
 
-    fun copyButtonClick(): (MyTagItem) -> Unit = {
+    private fun copyButtonClick(): () -> Unit = {
         fragmentMineTagListViewModel.copyHashTags(activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
         Common.showToast(requireContext(), getString(R.string.copied_success))
+    }
+
+    private fun removeButtonClick(): (MyTagItem) -> Unit = {
+        Thread(Runnable {
+            fragmentMineTagListViewModel.deleteTagData(it).run {
+                showTagList()
+            }
+        }).start()
     }
 }
