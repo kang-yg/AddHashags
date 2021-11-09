@@ -22,12 +22,18 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
             myTagItemOptionConstraintLayout(position)
             copyButtonEvent(myTagItem)
             removeButtonEvent(myTagItem)
+            setVisibilityMyTagItemOptionConstraintLayout(position)
+        }
+
+        private fun setVisibilityMyTagItemOptionConstraintLayout(position: Int) {
+            when (selectItemPosition.contains(position)) {
+                true -> itemBinding.myTagItemOptionConstraintLayout.visibility = View.VISIBLE
+                false -> itemBinding.myTagItemOptionConstraintLayout.visibility = View.GONE
+
+            }
         }
 
         private fun cardView(position: Int) {
-            if (selectItemPosition.contains(position)) {
-                itemBinding.myTagItemOptionConstraintLayout.visibility = View.VISIBLE
-            }
             itemBinding.myTagItemCardView.setOnClickListener {
                 selectItemPosition.add(position)
                 itemBinding.myTagItemOptionConstraintLayout.visibility = View.VISIBLE
@@ -35,9 +41,6 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
         }
 
         private fun myTagItemOptionConstraintLayout(position: Int) {
-            if (!selectItemPosition.contains(position)) {
-                itemBinding.myTagItemOptionConstraintLayout.visibility = View.GONE
-            }
             itemBinding.myTagItemOptionConstraintLayout.setOnClickListener {
                 selectItemPosition.remove(position)
                 itemBinding.myTagItemOptionConstraintLayout.visibility = View.GONE
@@ -100,10 +103,10 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<MyTagItem>() {
             override fun areItemsTheSame(oldItem: MyTagItem, newItem: MyTagItem) =
-                oldItem == newItem
+                    oldItem == newItem
 
             override fun areContentsTheSame(oldItem: MyTagItem, newItem: MyTagItem) =
-                oldItem.item_title == newItem.item_title
+                    oldItem.item_title == newItem.item_title
         }
     }
 }

@@ -1,8 +1,6 @@
 <resources>
     <!-- Basic -->
     <string name="app_name">Tag+</string>
-    <string name="facebook_app_id">310547917555527</string>
-
     <string name="admob_app_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner_ad_unit_id">ca-app-pub-1132950920553121/4736284767</string>
     <string name="banner_ad_unit_id_for_test">ca-app-pub-3940256099942544/6300978111</string>
