@@ -8,16 +8,18 @@ import com.tagplus.addhashtags.AppDatabase
 import com.tagplus.addhashtags.model.MyTagItem
 
 class FragmentMineTagListViewModel(private val database: AppDatabase) : ViewModel() {
-    private val clipLiveData: MutableLiveData<MutableList<String>> = MutableLiveData()
+    private var clipDataList: ArrayList<String> = arrayListOf()
 
     fun getAllMyTagItems(): List<MyTagItem> {
         return database.myTagItemDAO().gatAllItems()
     }
 
-    fun getClipLiveData(): MutableLiveData<MutableList<String>> = clipLiveData
+    fun getClipDataList(): ArrayList<String> {
+        return this.clipDataList
+    }
 
     fun copyHashTags(clipboardManager: ClipboardManager) {
-        val clip: ClipData = ClipData.newPlainText(COPIED_HASHTAGS, createClipData(clipLiveData.value?.toList()))
+        val clip: ClipData = ClipData.newPlainText(COPIED_HASHTAGS, createClipData(clipDataList))
         clipboardManager.setPrimaryClip(clip)
     }
 

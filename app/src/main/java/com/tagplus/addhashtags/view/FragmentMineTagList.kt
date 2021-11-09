@@ -16,6 +16,7 @@ import com.tagplus.addhashtags.AppDatabase
 import com.tagplus.addhashtags.Common
 import com.tagplus.addhashtags.R
 import com.tagplus.addhashtags.databinding.FragmentMineTaglistBinding
+import com.tagplus.addhashtags.model.MyTagItem
 import com.tagplus.addhashtags.view.adapter.MyTagListAdapter
 import com.tagplus.addhashtags.view.viewmodelfactory.FragmentMineTagListViewModelFactory
 import com.tagplus.addhashtags.viewmodel.FragmentMineTagListViewModel
@@ -31,18 +32,12 @@ class FragmentMineTagList : Fragment() {
         fragmentMineTagListBinding.mineRecyclerView
     }
     private val myTagListAdapter: MyTagListAdapter by lazy {
-        MyTagListAdapter(fragmentMineTagListViewModel.getClipLiveData())
-    }
-    private val copyButton by lazy {
-        fragmentMineTagListBinding.btCopy
+        MyTagListAdapter(fragmentMineTagListViewModel.getClipDataList(), copyEvent = copyButtonClick())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentMineTagListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mine_taglist, container, false)
         fragmentMineTagListViewModel = ViewModelProvider(this, FragmentMineTagListViewModelFactory(db)).get(FragmentMineTagListViewModel::class.java)
-/*        fragmentMineTagListViewModel.getClipLiveData().observe(this, {
-            setCopyButtonVisible()
-        })*/
 
         return fragmentMineTagListBinding.root
     }
@@ -85,14 +80,7 @@ class FragmentMineTagList : Fragment() {
         fragmentManager.addToBackStack(null)
     }
 
-    private fun setCopyButtonVisible() {
-        when (fragmentMineTagListViewModel.getClipLiveData().value?.isEmpty()) {
-            true -> copyButton.visibility = View.GONE
-            false -> copyButton.visibility = View.VISIBLE
-        }
-    }
-
-    fun copyButtonClick() {
+    fun copyButtonClick(): (MyTagItem) -> Unit = {
         fragmentMineTagListViewModel.copyHashTags(activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
         Common.showToast(requireContext(), getString(R.string.copied_success))
     }
