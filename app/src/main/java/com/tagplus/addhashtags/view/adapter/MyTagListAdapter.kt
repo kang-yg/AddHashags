@@ -12,24 +12,34 @@ import com.tagplus.addhashtags.databinding.MytagItemBinding
 import com.tagplus.addhashtags.model.MyTagItem
 
 class MyTagListAdapter(private var clipData: ArrayList<String>, private val copyEvent: () -> Unit, private val removeEvent: (MyTagItem) -> Unit) : ListAdapter<MyTagItem, MyTagListAdapter.MyTagViewHolder>(diffUtil) {
+    private val selectItemPosition: ArrayList<Int> = arrayListOf()
+
     inner class MyTagViewHolder(private val itemBinding: MytagItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(myTagItem: MyTagItem) {
+        fun bind(myTagItem: MyTagItem, position: Int) {
             itemBinding.myTagItemTitle.text = myTagItem.item_title
             attachChips(myTagItem.item_tags)
-            cardViewClickEvent()
-            myTagItemOptionConstraintLayoutClickEvent()
+            cardView(position)
+            myTagItemOptionConstraintLayout(position)
             copyButtonEvent(myTagItem)
             removeButtonEvent(myTagItem)
         }
 
-        private fun cardViewClickEvent() {
+        private fun cardView(position: Int) {
+            if (selectItemPosition.contains(position)) {
+                itemBinding.myTagItemOptionConstraintLayout.visibility = View.VISIBLE
+            }
             itemBinding.myTagItemCardView.setOnClickListener {
+                selectItemPosition.add(position)
                 itemBinding.myTagItemOptionConstraintLayout.visibility = View.VISIBLE
             }
         }
 
-        private fun myTagItemOptionConstraintLayoutClickEvent() {
+        private fun myTagItemOptionConstraintLayout(position: Int) {
+            if (!selectItemPosition.contains(position)) {
+                itemBinding.myTagItemOptionConstraintLayout.visibility = View.GONE
+            }
             itemBinding.myTagItemOptionConstraintLayout.setOnClickListener {
+                selectItemPosition.remove(position)
                 itemBinding.myTagItemOptionConstraintLayout.visibility = View.GONE
             }
         }
@@ -84,7 +94,7 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
     }
 
     override fun onBindViewHolder(holder: MyTagViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        holder.bind(currentList[position], position)
     }
 
     companion object {
