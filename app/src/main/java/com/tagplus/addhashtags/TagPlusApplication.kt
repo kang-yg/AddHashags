@@ -1,24 +1,11 @@
 package com.tagplus.addhashtags
 
 import android.app.Application
-import android.util.Log
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 
 class TagPlusApplication : Application() {
-    companion object {
-        const val TITLE = "TITLE"
-        const val TAGS = "TAGS"
-        val firebaseDatabase by lazy {
-            Firebase.database
-        }
-        private val firebaseMessaging by lazy {
-            FirebaseMessaging.getInstance()
-        }
-        var fcmToken: String? = null
-    }
-
     override fun onCreate() {
         super.onCreate()
         getFCMToken()
@@ -34,5 +21,17 @@ class TagPlusApplication : Application() {
 
             fcmToken = task.result
         }
+    }
+
+    companion object {
+        const val TAGS = "TAGS"
+        const val USER_ID = "USER_ID"
+        val firebaseDatabase by lazy {
+            Firebase.database
+        }
+        private val firebaseMessaging by lazy {
+            FirebaseMessaging.getInstance()
+        }
+        var fcmToken: String? = null
     }
 }

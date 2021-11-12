@@ -24,9 +24,8 @@ class FragmentMineAddTagViewModel(private val database: AppDatabase) : ViewModel
     }
 
     // Firebase write
-    // TODO 키(TAG) 랜덤하개 변경
     private fun writeDataToFirebaseRealtimeData(title: String, tags: String) {
-        fcmToken?.let { firebaseDatabase.getReference(it).child(title).setValue(title) }
-        fcmToken?.let { firebaseDatabase.getReference(it).child(TagPlusApplication.TAGS).setValue(tags) }
+        fcmToken?.let { firebaseDatabase.getReference(TagPlusApplication.USER_ID).child(it).child(title).setValue(title) }
+        fcmToken?.let { firebaseDatabase.getReference(TagPlusApplication.USER_ID).child(it).child(title).child(TagPlusApplication.TAGS).setValue(tags) }
     }
 }

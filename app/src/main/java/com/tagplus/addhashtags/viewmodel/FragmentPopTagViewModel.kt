@@ -1,15 +1,14 @@
 package com.tagplus.addhashtags.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.tagplus.addhashtags.TagPlusApplication
 
-class FragmentPopTagViewModel: ViewModel() {
-    var firebaseDatabaseSnapshot: MutableLiveData<HashMap<String, String>> = MutableLiveData()
+class FragmentPopTagViewModel : ViewModel() {
+    private val allTagArrayList: ArrayList<String> = arrayListOf()
+    val tagCountMap: HashMap<String, Int> = HashMap()
 
     private val firebaseDatabase by lazy {
         TagPlusApplication.firebaseDatabase
@@ -19,28 +18,45 @@ class FragmentPopTagViewModel: ViewModel() {
     }
 
     // Firebase read
-    // TODO 잘못된 데이터를 가져 옴
-    fun readDataFromFirebaseRealtimeData() {
-        fcmToken?.let {
-            firebaseDatabase.getReference(it).addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val value: HashMap<String, String> = snapshot.value as HashMap<String, String>
-                    firebaseDatabaseSnapshot.postValue(value)
-                    Log.d("AAA", value.toString())
-                }
+    fun readDataFromFirebaseRealtimeData(invalidateChipGroup: () -> Unit) {
+        firebaseDatabase.getReference(TagPlusApplication.USER_ID).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                parseFirebaseDataSnapshot(snapshot)
+                setTagUsageFrequency()
+                sortTagsFromFirebaseRealtimeData()
+                invalidateChipGroup()
+            }
 
-                // Failed to read value
-                override fun onCancelled(error: DatabaseError) {
-                }
+            // Failed to read value
+            override fun onCancelled(error: DatabaseError) {
+            }
 
-            })
+        })
+    }
+
+    // Sort tags
+    private fun sortTagsFromFirebaseRealtimeData() {
+        tagCountMap.toList().sortedBy { (_, value) -> value }.reversed().toMap()
+    }
+
+    private fun setTagUsageFrequency() {
+        tagCountMap.clear()
+        val allTagString = allTagArrayList.joinToString(" ")
+        allTagString.split(" ").forEach { tag ->
+            var count = 1
+            if (tagCountMap.containsKey(tag)) {
+                count++
+            }
+            tagCountMap[tag] = count
         }
     }
 
-    // Sort title
-
-    // Sort tags
-    fun sortTagsFromFirebaseRealtimeData() {
-
+    private fun parseFirebaseDataSnapshot(snapshot: DataSnapshot) {
+        for (underUserKey: DataSnapshot in snapshot.children) {
+            for (underTitle: DataSnapshot in underUserKey.children) {
+                val tag = underTitle.child(TagPlusApplication.TAGS)
+                allTagArrayList.add(tag.value.toString())
+            }
+        }
     }
 }

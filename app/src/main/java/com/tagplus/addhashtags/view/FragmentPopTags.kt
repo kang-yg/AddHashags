@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.chip.Chip
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -19,6 +20,9 @@ import com.tagplus.addhashtags.viewmodel.FragmentPopTagViewModel
 class FragmentPopTags : Fragment() {
     private lateinit var fragmentPopBinding: FragmentPopBinding
     private lateinit var fragmentPopTagViewModel: FragmentPopTagViewModel
+    private val popTagsChipGroup by lazy {
+        fragmentPopBinding.popTagsChipGroup
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentPopBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_pop, container, false)
@@ -28,6 +32,15 @@ class FragmentPopTags : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        fragmentPopTagViewModel.readDataFromFirebaseRealtimeData()
+        fragmentPopTagViewModel.readDataFromFirebaseRealtimeData(setPopTagsChipGroup())
+    }
+
+    private fun setPopTagsChipGroup(): () -> Unit = {
+        popTagsChipGroup.removeAllViews()
+        fragmentPopTagViewModel.tagCountMap.forEach { map ->
+            popTagsChipGroup.addView(Chip(context).also { chip ->
+                chip.text = map.key
+            })
+        }
     }
 }
