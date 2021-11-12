@@ -26,6 +26,7 @@ class TagPlusApplication : Application() {
     companion object {
         const val TAGS = "TAGS"
         const val USER_ID = "USER_ID"
+        const val MAX_COPY_SIZE = 30
         val firebaseDatabase by lazy {
             Firebase.database
         }

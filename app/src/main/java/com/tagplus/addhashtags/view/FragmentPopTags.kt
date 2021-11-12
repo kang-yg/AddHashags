@@ -9,9 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.chip.Chip
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import com.tagplus.addhashtags.R
 import com.tagplus.addhashtags.TagPlusApplication
 import com.tagplus.addhashtags.databinding.FragmentPopBinding
@@ -23,6 +20,9 @@ class FragmentPopTags : Fragment() {
     private val popTagsChipGroup by lazy {
         fragmentPopBinding.popTagsChipGroup
     }
+    private val popTagsProgressIndicator by lazy {
+        fragmentPopBinding.popTagsProgressIndicator
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentPopBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_pop, container, false)
@@ -30,17 +30,25 @@ class FragmentPopTags : Fragment() {
         return fragmentPopBinding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         fragmentPopTagViewModel.readDataFromFirebaseRealtimeData(setPopTagsChipGroup())
     }
 
     private fun setPopTagsChipGroup(): () -> Unit = {
+        var viewCount = 0
+        popTagsProgressIndicator.visibility = View.VISIBLE
         popTagsChipGroup.removeAllViews()
-        fragmentPopTagViewModel.tagCountMap.forEach { map ->
-            popTagsChipGroup.addView(Chip(context).also { chip ->
-                chip.text = map.key
-            })
+
+        fragmentPopTagViewModel.tagSortedCountMap.forEach { map ->
+            if (viewCount < TagPlusApplication.MAX_COPY_SIZE) {
+                popTagsChipGroup.addView(Chip(context).also { chip ->
+                    viewCount++
+                    chip.text = map.key
+                })
+            }
         }
+        popTagsProgressIndicator.visibility = View.GONE
+        fragmentPopTagViewModel.tagSortedCountMap = mapOf()
     }
 }

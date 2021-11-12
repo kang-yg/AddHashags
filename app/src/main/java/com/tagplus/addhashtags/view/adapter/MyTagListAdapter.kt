@@ -17,7 +17,7 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
     inner class MyTagViewHolder(private val itemBinding: MytagItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(myTagItem: MyTagItem, position: Int) {
             itemBinding.myTagItemTitle.text = myTagItem.item_title
-            attachChips(myTagItem.item_tags)
+            attachChips(myTagItem.item_tags, position)
             cardView(position)
             myTagItemOptionConstraintLayout(position)
             copyButtonEvent(myTagItem)
@@ -66,18 +66,18 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
             }
         }
 
-        private fun attachChips(tags: String) {
+        private fun attachChips(tags: String, position: Int) {
             itemBinding.myTagItemChipGroup.removeAllViews()
 
             val splitTags = tags.split(" ")
             splitTags.forEach { tag ->
                 if (tag != "#") {
-                    itemBinding.myTagItemChipGroup.addView(createChips(tag))
+                    itemBinding.myTagItemChipGroup.addView(createChips(tag, position))
                 }
             }
         }
 
-        private fun createChips(tag: String): Chip {
+        private fun createChips(tag: String, position: Int): Chip {
             return Chip(itemBinding.myTagItemChipGroup.context).also { chip ->
                 chip.id = View.generateViewId()
                 chip.isCheckable = false
@@ -87,6 +87,10 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
                     chip.chipBackgroundColor = itemBinding.myTagItemChipGroup.context.getColorStateList(R.color.MistyRose01)
                 } else {
                     chip.isCheckedIconVisible = true
+                }
+                chip.setOnClickListener {
+                    selectItemPosition.add(position)
+                    itemBinding.myTagItemOptionConstraintLayout.visibility = View.VISIBLE
                 }
             }
         }

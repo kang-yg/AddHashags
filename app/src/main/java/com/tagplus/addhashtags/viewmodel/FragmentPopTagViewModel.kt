@@ -7,14 +7,11 @@ import com.google.firebase.database.ValueEventListener
 import com.tagplus.addhashtags.TagPlusApplication
 
 class FragmentPopTagViewModel : ViewModel() {
+    var tagSortedCountMap: Map<String, Int> = mapOf()
+    private val tagCountMap: HashMap<String, Int> = HashMap()
     private val allTagArrayList: ArrayList<String> = arrayListOf()
-    val tagCountMap: HashMap<String, Int> = HashMap()
-
     private val firebaseDatabase by lazy {
         TagPlusApplication.firebaseDatabase
-    }
-    private val fcmToken by lazy {
-        TagPlusApplication.fcmToken
     }
 
     // Firebase read
@@ -36,26 +33,28 @@ class FragmentPopTagViewModel : ViewModel() {
 
     // Sort tags
     private fun sortTagsFromFirebaseRealtimeData() {
-        tagCountMap.toList().sortedBy { (_, value) -> value }.reversed().toMap()
+        tagSortedCountMap = tagCountMap.toList().sortedBy { (_, value) -> value }.reversed().toMap()
     }
 
     private fun setTagUsageFrequency() {
-        tagCountMap.clear()
         val allTagString = allTagArrayList.joinToString(" ")
         allTagString.split(" ").forEach { tag ->
-            var count = 1
-            if (tagCountMap.containsKey(tag)) {
-                count++
-            }
+            val count: Int = tagCountMap[tag] ?: 0
             tagCountMap[tag] = count
+            if (tagCountMap.containsKey(tag)) {
+                tagCountMap[tag] = count + 1
+            }
         }
     }
 
     private fun parseFirebaseDataSnapshot(snapshot: DataSnapshot) {
+        allTagArrayList.clear()
         for (underUserKey: DataSnapshot in snapshot.children) {
             for (underTitle: DataSnapshot in underUserKey.children) {
                 val tag = underTitle.child(TagPlusApplication.TAGS)
-                allTagArrayList.add(tag.value.toString())
+                if (tag.value != null) {
+                    allTagArrayList.add(tag.value.toString())
+                }
             }
         }
     }
