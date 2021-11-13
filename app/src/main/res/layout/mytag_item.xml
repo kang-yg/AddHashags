@@ -50,18 +50,20 @@
             android:id="@+id/myTagItemOptionConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/light_grey3"
+            android:background="@drawable/bg_my_tag_item_option_constraint_layout"
             android:visibility="gone">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/myTagItemCopyBt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tag_copy"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/bg_my_tag_item"
+                android:text="@string/tag_copy"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/myTagItemRemoveBt"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,6 +71,7 @@
                 android:id="@+id/myTagItemRemoveBt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:background="@drawable/bg_my_tag_item"
                 android:text="@string/tag_remove"
                 android:textColor="@color/white"
