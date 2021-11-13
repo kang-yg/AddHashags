@@ -22,26 +22,22 @@ class ActivityMain : AppCompatActivity() {
     private val db: AppDatabase by lazy {
         Room.databaseBuilder(this, AppDatabase::class.java, "AddHashTags").build()
     }
-    var tabList = arrayListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activityMainBinding.root)
         activityMainViewModel = ViewModelProvider(this, ActivityMainViewModelFactory(db)).get(ActivityMainViewModel::class.java)
-    }
 
-    override fun onResume() {
-        super.onResume()
         initMainViewPager()
         initMainTapLayout()
     }
 
     private fun initMainViewPager() {
         activityMainBinding.mainViewPager2.adapter = ViewPagerAdapter(this)
-
     }
 
     private fun initMainTapLayout() {
+        val tabList = arrayListOf<String>()
         tabList.add(getString(R.string.popularTags))
         tabList.add(getString(R.string.myTags))
 
