@@ -18,7 +18,7 @@
             android:id="@+id/mineConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/mint02">
+            android:background="@color/white">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mineRecyclerView"
@@ -36,6 +36,7 @@
                 android:layout_margin="16dp"
                 android:onClick="@{() -> fragmentMineTagList.floatingButtonClick()}"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:backgroundTint="@color/light_grey4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_add" />
         </androidx.constraintlayout.widget.ConstraintLayout>

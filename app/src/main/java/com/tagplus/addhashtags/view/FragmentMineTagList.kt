@@ -15,16 +15,16 @@ import androidx.room.Room
 import com.tagplus.addhashtags.AppDatabase
 import com.tagplus.addhashtags.Common
 import com.tagplus.addhashtags.R
+import com.tagplus.addhashtags.databinding.ActivityMainBinding
 import com.tagplus.addhashtags.databinding.FragmentMineTaglistBinding
 import com.tagplus.addhashtags.model.MyTagItem
 import com.tagplus.addhashtags.view.adapter.MyTagListAdapter
-import com.tagplus.addhashtags.view.viewmodelfactory.FragmentMineTagListViewModelFactory
+import com.tagplus.addhashtags.viewmodel.viewmodelfactory.FragmentMineTagListViewModelFactory
 import com.tagplus.addhashtags.viewmodel.FragmentMineTagListViewModel
 
 class FragmentMineTagList : Fragment() {
     private lateinit var fragmentMineTagListBinding: FragmentMineTaglistBinding
     private lateinit var fragmentMineTagListViewModel: FragmentMineTagListViewModel
-
     private val db: AppDatabase by lazy {
         Room.databaseBuilder(requireContext(), AppDatabase::class.java, "AddHashTags").build()
     }
@@ -57,7 +57,6 @@ class FragmentMineTagList : Fragment() {
         fragmentMineTagListBinding.fragmentMineTagList = this
     }
 
-    // TODO RecyclerView.ItemDecoration 적용
     private fun setRecyclerView() {
         mineTagListRecyclerView.layoutManager = LinearLayoutManager(context)
         mineTagListRecyclerView.adapter = myTagListAdapter

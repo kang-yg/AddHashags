@@ -10,11 +10,13 @@ import com.tagplus.addhashtags.AppDatabase
 import com.tagplus.addhashtags.R
 import com.tagplus.addhashtags.databinding.ActivityMainBinding
 import com.tagplus.addhashtags.view.adapter.ViewPagerAdapter
-import com.tagplus.addhashtags.view.viewmodelfactory.ActivityMainViewModelFactory
+import com.tagplus.addhashtags.viewmodel.viewmodelfactory.ActivityMainViewModelFactory
 import com.tagplus.addhashtags.viewmodel.ActivityMainViewModel
 
 class ActivityMain : AppCompatActivity() {
-    private lateinit var activityMainBinding: ActivityMainBinding
+    private val activityMainBinding: ActivityMainBinding by lazy {
+        DataBindingUtil.setContentView(this, R.layout.activity_main)
+    }
     private lateinit var activityMainViewModel: ActivityMainViewModel
 
     private val db: AppDatabase by lazy {
@@ -22,12 +24,14 @@ class ActivityMain : AppCompatActivity() {
     }
     var tabList = arrayListOf<String>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setContentView(activityMainBinding.root)
         activityMainViewModel = ViewModelProvider(this, ActivityMainViewModelFactory(db)).get(ActivityMainViewModel::class.java)
+    }
 
+    override fun onResume() {
+        super.onResume()
         initMainViewPager()
         initMainTapLayout()
     }
@@ -38,16 +42,11 @@ class ActivityMain : AppCompatActivity() {
     }
 
     private fun initMainTapLayout() {
-        tabList.add(TITLE_POP)
-        tabList.add(TITLE_MINE)
+        tabList.add(getString(R.string.popularTags))
+        tabList.add(getString(R.string.myTags))
 
         TabLayoutMediator(activityMainBinding.mainTabLayout, activityMainBinding.mainViewPager2) { tablayout, viewpager2 ->
             tablayout.text = tabList[viewpager2]
         }.attach()
-    }
-
-    companion object {
-        const val TITLE_POP = "POP"
-        const val TITLE_MINE = "MINE"
     }
 }

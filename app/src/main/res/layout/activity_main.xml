@@ -2,10 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/light_grey3">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/mainTabLayout"
@@ -14,7 +14,10 @@
             app:layout_constraintBottom_toTopOf="@id/mainViewPager2"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorColor="@color/white"
+            app:tabTextColor="@color/light_grey3" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/mainViewPager2"

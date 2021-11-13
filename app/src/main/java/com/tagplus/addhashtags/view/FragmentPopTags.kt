@@ -21,7 +21,7 @@ class FragmentPopTags : Fragment() {
         fragmentPopBinding.popTagsChipGroup
     }
     private val popTagsProgressIndicator by lazy {
-        fragmentPopBinding.popTagsProgressIndicator
+        fragmentPopBinding.progressIndicator
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,14 +40,17 @@ class FragmentPopTags : Fragment() {
         popTagsProgressIndicator.visibility = View.VISIBLE
         popTagsChipGroup.removeAllViews()
 
-        fragmentPopTagViewModel.tagSortedCountMap.forEach { map ->
-            if (viewCount < TagPlusApplication.MAX_COPY_SIZE) {
-                popTagsChipGroup.addView(Chip(context).also { chip ->
-                    viewCount++
-                    chip.text = map.key
-                })
+        if (context != null) {
+            fragmentPopTagViewModel.tagSortedCountMap.forEach { map ->
+                if (viewCount < TagPlusApplication.MAX_COPY_SIZE) {
+                    popTagsChipGroup.addView(Chip(context).also { chip ->
+                        viewCount++
+                        chip.text = map.key
+                    })
+                }
             }
         }
+
         popTagsProgressIndicator.visibility = View.GONE
         fragmentPopTagViewModel.tagSortedCountMap = mapOf()
     }

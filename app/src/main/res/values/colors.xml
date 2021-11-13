@@ -3,7 +3,14 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="light_grey1">#F9F9F9</color>
+    <color name="light_grey2">#DCDCDC</color>
+    <color name="light_grey3">#DCDCDC</color>
+    <color name="light_grey4">#7C7C7C</color>
+
     <color name="mint01">#aceace</color>
     <color name="mint02">#9ad2b9</color>
     <color name="mint03">#89bba4</color>

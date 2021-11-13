@@ -27,8 +27,12 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
 
         private fun setVisibilityMyTagItemOptionConstraintLayout(position: Int) {
             when (selectItemPosition.contains(position)) {
-                true -> itemBinding.myTagItemOptionConstraintLayout.visibility = View.VISIBLE
-                false -> itemBinding.myTagItemOptionConstraintLayout.visibility = View.GONE
+                true -> {
+                    itemBinding.myTagItemOptionConstraintLayout.visibility = View.VISIBLE
+                }
+                false -> {
+                    itemBinding.myTagItemOptionConstraintLayout.visibility = View.GONE
+                }
 
             }
         }
@@ -83,11 +87,6 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
                 chip.isCheckable = false
                 chip.isCheckedIconVisible = false
                 chip.text = tag
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                    chip.chipBackgroundColor = itemBinding.myTagItemChipGroup.context.getColorStateList(R.color.MistyRose01)
-                } else {
-                    chip.isCheckedIconVisible = true
-                }
                 chip.setOnClickListener {
                     selectItemPosition.add(position)
                     itemBinding.myTagItemOptionConstraintLayout.visibility = View.VISIBLE

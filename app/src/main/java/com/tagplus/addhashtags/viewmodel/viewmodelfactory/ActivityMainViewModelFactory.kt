@@ -1,4 +1,4 @@
-package com.tagplus.addhashtags.view.viewmodelfactory
+package com.tagplus.addhashtags.viewmodel.viewmodelfactory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

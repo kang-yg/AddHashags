@@ -16,7 +16,7 @@ import com.tagplus.addhashtags.AppDatabase
 import com.tagplus.addhashtags.R
 import com.tagplus.addhashtags.databinding.FragmentMineAddtagBinding
 import com.tagplus.addhashtags.databinding.FragmentMineBinding
-import com.tagplus.addhashtags.view.viewmodelfactory.FragmentMineAddTagViewModelFactory
+import com.tagplus.addhashtags.viewmodel.viewmodelfactory.FragmentMineAddTagViewModelFactory
 import com.tagplus.addhashtags.viewmodel.FragmentMineAddTagViewModel
 
 class FragmentMineAddTag : Fragment() {
