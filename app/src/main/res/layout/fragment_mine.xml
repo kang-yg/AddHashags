@@ -5,8 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mineConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/mint02">
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/mineFrame"

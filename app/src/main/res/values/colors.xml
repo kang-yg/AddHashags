@@ -12,18 +12,6 @@
     <color name="light_grey3_alpha">#CCDCDCDC</color>
     <color name="light_grey4">#7C7C7C</color>
 
-    <color name="mint01">#aceace</color>
-    <color name="mint02">#9ad2b9</color>
-    <color name="mint03">#89bba4</color>
-    <color name="mint04">#78a390</color>
-    <color name="mint05">#678c7b</color>
-
-    <color name="lightBlue01">#ace7ea</color>
-    <color name="lightBlue02">#9acfd2</color>
-    <color name="lightBlue03">#89b8bb</color>
-    <color name="lightBlue04">#78a1a3</color>
-    <color name="lightBlue05">#678a8c</color>
-
     <color name="MistyRose01">#ffe4e1</color>
     <color name="MistyRose02">#e5cdca</color>
     <color name="MistyRose03">#ccb6b4</color>
