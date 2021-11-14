@@ -21,8 +21,8 @@ class FragmentMine : Fragment() {
         return fragmentMineBinding.root
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         activity?.supportFragmentManager?.beginTransaction()?.replace(mineFrame.id, FragmentMineTagList())?.commit()
     }
 }
