@@ -1,4 +1,10 @@
 <resources>
+    <!--FCM-->
+    <string name="channel_id_update">Update</string>
+    <string name="channel_description_update">There\'s an app update exists.</string>
+    <string name="channel_id_notice">Notice</string>
+    <string name="channel_description_notice">There is a notice.</string>
+
     <!-- Basic -->
     <string name="app_name">Tag+</string>
     <string name="input_tag_title">태그모음 제목</string>

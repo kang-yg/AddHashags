@@ -22,13 +22,14 @@ class FCMService : FirebaseMessagingService() {
         createNotificationChannelIfNeeded()
 
         val type = remoteMessage.data["type"]?.let { NotificationType.valueOf(it) }
+        val purpose = remoteMessage.data["purpose"]
         val title = remoteMessage.data["title"]
         val message = remoteMessage.data["message"]
 
         type ?: return
 
         NotificationManagerCompat.from(this)
-            .notify(type.id, createNotification(type, title, message))
+            .notify(type.id, createNotification(type, purpose, title, message))
     }
 
     override fun onNewToken(p0: String) {
@@ -37,20 +38,36 @@ class FCMService : FirebaseMessagingService() {
 
     private fun createNotificationChannelIfNeeded() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                CHANNEL_ID,
-                CHANNEL_NAME,
+            val appUpdateChannel = NotificationChannel(
+                "Update",
+                resources.getString(R.string.channel_id_update),
                 NotificationManager.IMPORTANCE_DEFAULT
-            )
-            channel.description = CHANNEL_DESCRIPTION
+            ).apply {
+                description = resources.getString(R.string.channel_description_update)
+            }
 
-            (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
-                .createNotificationChannel(channel)
+            val appNoticeChannel = NotificationChannel(
+                "Notice",
+                resources.getString(R.string.channel_id_notice),
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = resources.getString(R.string.channel_description_notice)
+            }
+
+            ArrayList<NotificationChannel>().apply {
+                add(appUpdateChannel)
+                add(appNoticeChannel)
+            }.run {
+                for (i in this) {
+                    (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(i)
+                }
+            }
         }
     }
 
     private fun createNotification(
         type: NotificationType,
+        purpose: String?,
         title: String?,
         message: String?
     ): Notification {
@@ -59,7 +76,7 @@ class FCMService : FirebaseMessagingService() {
             addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         }
         val pendingIntent = PendingIntent.getActivity(this, type.id, intent, FLAG_UPDATE_CURRENT)
-        val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
+        val notificationBuilder = NotificationCompat.Builder(this, purpose ?: CHANNEL_DEFAULT_ID)
             .setSmallIcon(R.mipmap.app_icon)
             .setContentTitle(title)
             .setContentText(message)
@@ -103,8 +120,6 @@ class FCMService : FirebaseMessagingService() {
     }
 
     companion object {
-        private const val CHANNEL_NAME = "Emoji Party"
-        private const val CHANNEL_DESCRIPTION = "Emoji Party를 위한 채널"
-        private const val CHANNEL_ID = "Channel Id"
+        private const val CHANNEL_DEFAULT_ID = "Channel Id"
     }
 }

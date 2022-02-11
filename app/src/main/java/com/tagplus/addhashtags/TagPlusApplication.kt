@@ -1,6 +1,7 @@
 package com.tagplus.addhashtags
 
 import android.app.Application
+import android.util.Log
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
@@ -20,6 +21,9 @@ class TagPlusApplication : Application() {
             }
 
             fcmToken = task.result
+            if (BuildConfig.DEBUG) {
+                Log.d("FCMToken", "$fcmToken")
+            }
         }
     }
 
