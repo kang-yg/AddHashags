@@ -10,9 +10,12 @@ import com.tagplus.addhashtags.AppDatabase
 import com.tagplus.addhashtags.R
 import com.tagplus.addhashtags.databinding.ActivityMainBinding
 import com.tagplus.addhashtags.view.adapter.ViewPagerAdapter
-import com.tagplus.addhashtags.viewmodel.viewmodelfactory.ActivityMainViewModelFactory
 import com.tagplus.addhashtags.viewmodel.ActivityMainViewModel
+import com.tagplus.addhashtags.viewmodel.viewmodelfactory.ActivityMainViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ActivityMain : AppCompatActivity() {
     private val activityMainBinding: ActivityMainBinding by lazy {
         DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -22,6 +25,12 @@ class ActivityMain : AppCompatActivity() {
     private val db: AppDatabase by lazy {
         Room.databaseBuilder(this, AppDatabase::class.java, "AddHashTags").build()
     }
+
+    @Inject
+    lateinit var fragmentPopTags: FragmentPopTags
+
+    @Inject
+    lateinit var fragmentMine: FragmentMine
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +42,7 @@ class ActivityMain : AppCompatActivity() {
     }
 
     private fun initMainViewPager() {
-        activityMainBinding.mainViewPager2.adapter = ViewPagerAdapter(this)
+        activityMainBinding.mainViewPager2.adapter = ViewPagerAdapter(this, fragmentPopTags, fragmentMine)
     }
 
     private fun initMainTapLayout() {
