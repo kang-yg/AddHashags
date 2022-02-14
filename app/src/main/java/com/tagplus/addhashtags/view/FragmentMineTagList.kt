@@ -15,13 +15,15 @@ import androidx.room.Room
 import com.tagplus.addhashtags.AppDatabase
 import com.tagplus.addhashtags.Common
 import com.tagplus.addhashtags.R
-import com.tagplus.addhashtags.databinding.ActivityMainBinding
 import com.tagplus.addhashtags.databinding.FragmentMineTaglistBinding
 import com.tagplus.addhashtags.model.MyTagItem
 import com.tagplus.addhashtags.view.adapter.MyTagListAdapter
-import com.tagplus.addhashtags.viewmodel.viewmodelfactory.FragmentMineTagListViewModelFactory
 import com.tagplus.addhashtags.viewmodel.FragmentMineTagListViewModel
+import com.tagplus.addhashtags.viewmodel.viewmodelfactory.FragmentMineTagListViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class FragmentMineTagList : Fragment() {
     private lateinit var fragmentMineTagListBinding: FragmentMineTaglistBinding
     private lateinit var fragmentMineTagListViewModel: FragmentMineTagListViewModel
@@ -34,6 +36,9 @@ class FragmentMineTagList : Fragment() {
     private val myTagListAdapter: MyTagListAdapter by lazy {
         MyTagListAdapter(fragmentMineTagListViewModel.getClipDataList(), copyEvent = copyButtonClick(), removeEvent = removeButtonClick())
     }
+
+    @Inject
+    lateinit var fragmentMineAddTag: FragmentMineAddTag
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentMineTagListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mine_taglist, container, false)
@@ -74,9 +79,13 @@ class FragmentMineTagList : Fragment() {
 
     fun floatingButtonClick() {
         val mineTagListFrame = fragmentMineTagListBinding.mineTagListFrame
-        val fragmentManager = requireFragmentManager().beginTransaction()
-        fragmentManager.replace(mineTagListFrame.id, FragmentMineAddTag()).commitAllowingStateLoss()
-        fragmentManager.addToBackStack(null)
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        if (fragmentMineAddTag.isAdded) {
+            fragmentManager.popBackStackImmediate()
+        }
+        fragmentTransaction.replace(mineTagListFrame.id, fragmentMineAddTag).commitAllowingStateLoss()
+        fragmentTransaction.addToBackStack(null)
     }
 
     private fun copyButtonClick(): () -> Unit = {

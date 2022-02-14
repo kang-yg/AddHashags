@@ -87,6 +87,8 @@ class FragmentMineAddTag : Fragment() {
         Thread(Runnable {
             fragmentMineAddTagViewModel.addTagData(title, content).run {
                 activity?.runOnUiThread {
+                    fragmentMineAddTagBinding.tagContentTitleEdit.text?.clear()
+                    fragmentMineAddTagBinding.tagContentEdit.text?.clear()
                     activity?.supportFragmentManager?.beginTransaction()?.replace(fragmentMineBinding.mineFrame.id, FragmentMineTagList())?.commit()
                 }
             }
