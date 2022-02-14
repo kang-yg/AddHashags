@@ -1,9 +1,9 @@
 <resources>
     <!--FCM-->
     <string name="channel_id_update">Update</string>
-    <string name="channel_description_update">There\'s an app update exists.</string>
+    <string name="channel_description_update">업데이트 안내</string>
     <string name="channel_id_notice">Notice</string>
-    <string name="channel_description_notice">There is a notice.</string>
+    <string name="channel_description_notice">공지사항 안내</string>
 
     <!-- Basic -->
     <string name="app_name">Tag+</string>

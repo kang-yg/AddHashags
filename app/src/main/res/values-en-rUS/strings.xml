@@ -1,0 +1,24 @@
+<resources>
+    <!--FCM-->
+    <string name="channel_id_update">Update</string>
+    <string name="channel_description_update">There\'s an app update exists.</string>
+    <string name="channel_id_notice">Notice</string>
+    <string name="channel_description_notice">There is a notice.</string>
+
+    <!-- Basic -->
+    <string name="app_name">Tag+</string>
+    <string name="input_tag_title">Tag set title</string>
+    <string name="input_tag_title_example">Input example) \nDeveloper</string>
+    <string name="input_tag">Enter tags</string>
+    <string name="input_tag_example">Each tag is separated by a space.\n\nInput example1) \n#Android #Developer\n\nInput example2) \nTravel Love</string>
+    <string name="input_tag_max">The maximum number of tags is 30.</string>
+    <string name="input_tag_submit">Add</string>
+    <string name="input_tag_back">Go back</string>
+    <string name="tag_copy">Copy</string>
+    <string name="tag_remove">Delete</string>
+    <string name="copied_success">Copied to clipboard.</string>
+
+    <!-- TapLayout -->
+    <string name="popularTags">POP</string>
+    <string name="myTags">MINE</string>
+</resources>
