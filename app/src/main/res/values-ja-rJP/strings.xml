@@ -8,9 +8,9 @@
     <!-- Basic -->
     <string name="app_name">Tag+</string>
     <string name="input_tag_title">タグコレクションタイトル</string>
-    <string name="input_tag_title_example">力例) \n開発者</string>
+    <string name="input_tag_title_example">入力例) \n開発者</string>
     <string name="input_tag">タグ入力</string>
-    <string name="input_tag_example">各タグは浮かぶことで区切られます。\n\n入力例1) \n#안드로이드 #개발자\n\n入力例2) \n旅 いいね</string>
+    <string name="input_tag_example">各タグは分かち書きで区別できます。\n\n入力例1) \n#Android #開発者\n\n入力例2) \n旅 いいね</string>
     <string name="input_tag_max">最大タグの数は30個です。</string>
     <string name="input_tag_submit">追加する</string>
     <string name="input_tag_back">戻る</string>
