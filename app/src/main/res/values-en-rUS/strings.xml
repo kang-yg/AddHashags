@@ -10,7 +10,7 @@
     <string name="input_tag_title">Tag set title</string>
     <string name="input_tag_title_example">Input example) \nDeveloper</string>
     <string name="input_tag">Enter tags</string>
-    <string name="input_tag_example">Each tag is separated by a space.\n\nInput example1) \n#Android #Developer\n\nInput example2) \nTravel Love</string>
+    <string name="input_tag_example">Input example1) \n#Android #Developer\n\nInput example2) \nTravel Love</string>
     <string name="input_tag_max">The maximum number of tags is 30.</string>
     <string name="input_tag_submit">Add</string>
     <string name="input_tag_back">Go back</string>
