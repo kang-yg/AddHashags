@@ -21,7 +21,6 @@ import com.tagplus.addhashtags.viewmodel.FragmentMineAddTagViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class FragmentMineAddTag : Fragment() {
     private lateinit var fragmentMineBinding: FragmentMineBinding
     private lateinit var fragmentMineAddTagBinding: FragmentMineAddtagBinding
@@ -32,9 +31,6 @@ class FragmentMineAddTag : Fragment() {
     val btTagSubmit by lazy {
         fragmentMineAddTagBinding.addTagSubmit
     }
-
-    @Inject
-    lateinit var fragmentMineTagList: FragmentMineTagList
 
     private val db: AppDatabase by lazy {
         Room.databaseBuilder(requireContext(), AppDatabase::class.java, "AddHashTags").build()
@@ -94,9 +90,9 @@ class FragmentMineAddTag : Fragment() {
         Thread(Runnable {
             fragmentMineAddTagViewModel.addTagData(title, content).run {
                 activity?.runOnUiThread {
+                    activity?.supportFragmentManager?.beginTransaction()?.replace(fragmentMineBinding.mineFrame.id, FragmentMineTagList())?.commit()
                     fragmentMineAddTagBinding.tagContentTitleEdit.text?.clear()
                     fragmentMineAddTagBinding.tagContentEdit.text?.clear()
-                    activity?.supportFragmentManager?.beginTransaction()?.replace(fragmentMineBinding.mineFrame.id, fragmentMineTagList)?.commit()
                 }
             }
         }).start()
