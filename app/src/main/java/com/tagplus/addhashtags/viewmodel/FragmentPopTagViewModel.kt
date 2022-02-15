@@ -38,7 +38,10 @@ class FragmentPopTagViewModel : ViewModel() {
 
     private fun setTagUsageFrequency() {
         val allTagString = allTagArrayList.joinToString(" ")
-        allTagString.split(" ").filter { it != "" }.forEach { tag ->
+        allTagString.split(" ", "#").filter { it != "" }.map {
+            it.trim()
+            if (!it.startsWith("#")) "#".plus(it) else it
+        }.forEach { tag ->
             val count: Int = tagCountMap[tag] ?: 0
             tagCountMap[tag] = count
             if (tagCountMap.containsKey(tag)) {

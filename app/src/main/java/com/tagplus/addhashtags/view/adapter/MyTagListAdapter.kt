@@ -21,7 +21,7 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
             cardView(position)
             myTagItemOptionConstraintLayout(position)
             copyButtonEvent(myTagItem)
-            removeButtonEvent(myTagItem, position)
+            removeButtonEvent(myTagItem)
             setVisibilityMyTagItemOptionConstraintLayout(position)
         }
 
@@ -64,9 +64,8 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
             }
         }
 
-        private fun removeButtonEvent(myTagItem: MyTagItem, position: Int) {
+        private fun removeButtonEvent(myTagItem: MyTagItem) {
             itemBinding.myTagItemRemoveBt.setOnClickListener {
-                selectItemPosition.remove(position)
                 removeEvent(myTagItem)
             }
         }

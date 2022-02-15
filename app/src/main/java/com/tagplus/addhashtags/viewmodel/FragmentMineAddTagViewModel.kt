@@ -14,10 +14,10 @@ class FragmentMineAddTagViewModel(private val database: AppDatabase) : ViewModel
     }
 
     fun addTagData(title: String, content: String) {
-        val array = content.split(" ").map {
+        val array = content.split(" ", "#").map {
             it.trim()
             if (!it.startsWith("#")) "#".plus(it) else it
-        }.filter { it != "#" }
+        }
         val contentToString = array.joinToString(separator = " ")
         database.myTagItemDAO().insertMyTagItem(MyTagItem(title, contentToString))
         writeDataToFirebaseRealtimeData(title, contentToString)
