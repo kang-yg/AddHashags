@@ -67,7 +67,7 @@ class FragmentMineTagList : Fragment() {
         mineTagListRecyclerView.adapter = myTagListAdapter
     }
 
-    private fun showTagList() {
+    fun showTagList() {
         Thread(Runnable {
             fragmentMineTagListViewModel.getAllMyTagItems().run {
                 activity?.runOnUiThread {
@@ -81,8 +81,14 @@ class FragmentMineTagList : Fragment() {
         val mineTagListFrame = fragmentMineTagListBinding.mineTagListFrame
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(mineTagListFrame.id, fragmentMineAddTag).commitAllowingStateLoss()
-        fragmentTransaction.addToBackStack(null)
+        with(fragmentTransaction) {
+            if (fragmentMineAddTag.isAdded) {
+                show(fragmentMineAddTag)
+            } else {
+                replace(mineTagListFrame.id, fragmentMineAddTag)
+            }
+            commit()
+        }
     }
 
     private fun copyButtonClick(): () -> Unit = {

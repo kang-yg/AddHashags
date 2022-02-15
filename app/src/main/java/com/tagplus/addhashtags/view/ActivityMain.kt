@@ -3,6 +3,7 @@ package com.tagplus.addhashtags.view
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.google.android.material.tabs.TabLayoutMediator
@@ -32,6 +33,9 @@ class ActivityMain : AppCompatActivity() {
     @Inject
     lateinit var fragmentMine: FragmentMine
 
+    @Inject
+    lateinit var fragmentMineTagList: FragmentMineTagList
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activityMainBinding.root)
@@ -53,5 +57,9 @@ class ActivityMain : AppCompatActivity() {
         TabLayoutMediator(activityMainBinding.mainTabLayout, activityMainBinding.mainViewPager2) { tablayout, viewpager2 ->
             tablayout.text = tabList[viewpager2]
         }.attach()
+    }
+
+    fun refreshFragmentMineTagList() {
+        fragmentMineTagList.showTagList()
     }
 }

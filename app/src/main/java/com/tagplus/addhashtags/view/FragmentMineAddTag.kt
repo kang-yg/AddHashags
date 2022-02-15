@@ -22,7 +22,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 class FragmentMineAddTag : Fragment() {
-    private lateinit var fragmentMineBinding: FragmentMineBinding
     private lateinit var fragmentMineAddTagBinding: FragmentMineAddtagBinding
     private lateinit var fragmentMineAddTagViewModel: FragmentMineAddTagViewModel
     private val etTagTitle by lazy {
@@ -37,7 +36,6 @@ class FragmentMineAddTag : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        fragmentMineBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mine, container, false)
         fragmentMineAddTagBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mine_addtag, container, false)
         fragmentMineAddTagViewModel = ViewModelProvider(this, FragmentMineAddTagViewModelFactory(db)).get(FragmentMineAddTagViewModel::class.java)
 
@@ -87,12 +85,14 @@ class FragmentMineAddTag : Fragment() {
     fun submit() {
         val title = fragmentMineAddTagBinding.tagContentTitleEdit.text.toString()
         val content = fragmentMineAddTagBinding.tagContentEdit.text.toString()
+        val currentFragment = this
         Thread(Runnable {
             fragmentMineAddTagViewModel.addTagData(title, content).run {
                 activity?.runOnUiThread {
-                    activity?.supportFragmentManager?.beginTransaction()?.replace(fragmentMineBinding.mineFrame.id, FragmentMineTagList())?.commit()
+                    activity?.supportFragmentManager?.beginTransaction()?.remove(currentFragment)?.commit()
                     fragmentMineAddTagBinding.tagContentTitleEdit.text?.clear()
                     fragmentMineAddTagBinding.tagContentEdit.text?.clear()
+                    (activity as ActivityMain).refreshFragmentMineTagList()
                 }
             }
         }).start()
