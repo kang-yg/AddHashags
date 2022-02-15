@@ -21,7 +21,7 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
             cardView(position)
             myTagItemOptionConstraintLayout(position)
             copyButtonEvent(myTagItem)
-            removeButtonEvent(myTagItem)
+            removeButtonEvent(myTagItem, position)
             setVisibilityMyTagItemOptionConstraintLayout(position)
         }
 
@@ -64,8 +64,9 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
             }
         }
 
-        private fun removeButtonEvent(myTagItem: MyTagItem) {
+        private fun removeButtonEvent(myTagItem: MyTagItem, position: Int) {
             itemBinding.myTagItemRemoveBt.setOnClickListener {
+                selectItemPosition.remove(position)
                 removeEvent(myTagItem)
             }
         }
@@ -106,10 +107,10 @@ class MyTagListAdapter(private var clipData: ArrayList<String>, private val copy
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<MyTagItem>() {
             override fun areItemsTheSame(oldItem: MyTagItem, newItem: MyTagItem) =
-                    oldItem == newItem
+                oldItem == newItem
 
             override fun areContentsTheSame(oldItem: MyTagItem, newItem: MyTagItem) =
-                    oldItem.item_title == newItem.item_title
+                oldItem.item_title == newItem.item_title
         }
     }
 }
