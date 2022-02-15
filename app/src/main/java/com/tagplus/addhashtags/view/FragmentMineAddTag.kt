@@ -18,7 +18,10 @@ import com.tagplus.addhashtags.databinding.FragmentMineAddtagBinding
 import com.tagplus.addhashtags.databinding.FragmentMineBinding
 import com.tagplus.addhashtags.viewmodel.viewmodelfactory.FragmentMineAddTagViewModelFactory
 import com.tagplus.addhashtags.viewmodel.FragmentMineAddTagViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class FragmentMineAddTag : Fragment() {
     private lateinit var fragmentMineBinding: FragmentMineBinding
     private lateinit var fragmentMineAddTagBinding: FragmentMineAddtagBinding
@@ -29,6 +32,10 @@ class FragmentMineAddTag : Fragment() {
     val btTagSubmit by lazy {
         fragmentMineAddTagBinding.addTagSubmit
     }
+
+    @Inject
+    lateinit var fragmentMineTagList: FragmentMineTagList
+
     private val db: AppDatabase by lazy {
         Room.databaseBuilder(requireContext(), AppDatabase::class.java, "AddHashTags").build()
     }
@@ -89,13 +96,13 @@ class FragmentMineAddTag : Fragment() {
                 activity?.runOnUiThread {
                     fragmentMineAddTagBinding.tagContentTitleEdit.text?.clear()
                     fragmentMineAddTagBinding.tagContentEdit.text?.clear()
-                    activity?.supportFragmentManager?.beginTransaction()?.replace(fragmentMineBinding.mineFrame.id, FragmentMineTagList())?.commit()
+                    activity?.supportFragmentManager?.beginTransaction()?.replace(fragmentMineBinding.mineFrame.id, fragmentMineTagList)?.commit()
                 }
             }
         }).start()
     }
 
     fun back() {
-        activity?.supportFragmentManager?.beginTransaction()?.detach(this)?.commit()
+        activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
     }
 }

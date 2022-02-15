@@ -81,9 +81,6 @@ class FragmentMineTagList : Fragment() {
         val mineTagListFrame = fragmentMineTagListBinding.mineTagListFrame
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        if (fragmentMineAddTag.isAdded) {
-            fragmentManager.popBackStackImmediate()
-        }
         fragmentTransaction.replace(mineTagListFrame.id, fragmentMineAddTag).commitAllowingStateLoss()
         fragmentTransaction.addToBackStack(null)
     }

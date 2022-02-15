@@ -2,6 +2,7 @@ package com.tagplus.addhashtags
 
 import com.tagplus.addhashtags.view.FragmentMine
 import com.tagplus.addhashtags.view.FragmentMineAddTag
+import com.tagplus.addhashtags.view.FragmentMineTagList
 import com.tagplus.addhashtags.view.FragmentPopTags
 import dagger.Module
 import dagger.Provides
@@ -19,6 +20,10 @@ class AppModule {
     @Singleton
     @Provides
     fun getFragmentMine() = FragmentMine()
+
+    @Singleton
+    @Provides
+    fun getFragmentMineTagList() = FragmentMineTagList()
 
     @Singleton
     @Provides
