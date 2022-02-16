@@ -25,11 +25,12 @@ class FCMService : FirebaseMessagingService() {
         val purpose = remoteMessage.data["purpose"]
         val title = remoteMessage.data["title"]
         val message = remoteMessage.data["message"]
+        val bigText = remoteMessage.data["bigText"]
 
         type ?: return
 
         NotificationManagerCompat.from(this)
-            .notify(type.id, createNotification(type, purpose, title, message))
+            .notify(type.id, createNotification(type, purpose, title, message, bigText))
     }
 
     override fun onNewToken(p0: String) {
@@ -69,7 +70,8 @@ class FCMService : FirebaseMessagingService() {
         type: NotificationType,
         purpose: String?,
         title: String?,
-        message: String?
+        message: String?,
+        bigText: String?
     ): Notification {
         val intent = Intent(this, ActivityMain::class.java).apply {
             putExtra("notificationType", "${type.title} 타입")
@@ -90,14 +92,7 @@ class FCMService : FirebaseMessagingService() {
                 notificationBuilder.setStyle(
                     NotificationCompat.BigTextStyle()
                         .bigText(
-                            "😀 😃 😄 😁 😆 😅 😂 🤣 🥲 ☺️ 😊 😇 " +
-                                    "🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚 😋 😛 " +
-                                    "😝 😜 🤪 🤨 🧐 🤓 😎 🥸 🤩 🥳 😏 😒 " +
-                                    "😞 😔 😟 😕 🙁 ☹️ 😣 😖 😫 😩 🥺 😢 " +
-                                    "😭 😤 😠 😡 🤬 🤯 😳 🥵 🥶 😱 😨 😰 " +
-                                    "😥 😓 🤗 🤔 🤭 🤫 🤥 😶 😐 😑 😬 🙄 " +
-                                    "😯 😦 😧 😮 😲 🥱 😴 🤤 😪 😵 🤐 🥴 " +
-                                    "🤢 🤮 🤧 😷 🤒 🤕"
+                            bigText
                         )
                 )
             }
