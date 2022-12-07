@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:windowLightStatusBar">true</item>
+    <style name="MyText_H" parent="Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MyText_H1" parent="MyText_H">
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="MyText_H2" parent="MyText_H">
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="MyText_H3" parent="MyText_H">
+        <item name="android:textSize">14dp</item>
     </style>
 </resources>
