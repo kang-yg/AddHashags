@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/popularFragment">
+
+    <action
+        android:id="@+id/action_fragmentPop_to_fragmentMine"
+        app:destination="@id/mineFragment" />
+
+    <action
+        android:id="@+id/action_fragmentMine_to_fragmentPop"
+        app:destination="@id/popularFragment" />
+
+    <fragment
+        android:id="@+id/popularFragment"
+        android:name="com.tagplus.addhashtags.view.pop.PopularFragment"
+        android:label="PopularFragment"
+        tools:layout="@layout/fragment_pop" />
+
+    <fragment
+        android:id="@+id/mineFragment"
+        android:name="com.tagplus.addhashtags.view.mine.MineFragment"
+        android:label="MineFragment"
+        tools:layout="@layout/fragment_mine" />
+</navigation>
