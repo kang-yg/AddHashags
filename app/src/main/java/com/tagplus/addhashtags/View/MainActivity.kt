@@ -1,4 +1,4 @@
-package com.tagplus.addhashtags.view
+package com.tagplus.addhashtags.View
 
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -7,7 +7,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.tagplus.addhashtags.R
 import com.tagplus.addhashtags.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it) }) {
     private lateinit var navController: NavController
 

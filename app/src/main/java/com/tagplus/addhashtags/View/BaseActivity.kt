@@ -1,4 +1,4 @@
-package com.tagplus.addhashtags.view
+package com.tagplus.addhashtags.View
 
 import android.os.Bundle
 import android.view.LayoutInflater

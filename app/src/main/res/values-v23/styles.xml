@@ -3,6 +3,7 @@
 
     <style name="MyText_H" parent="Widget.AppCompat.TextView">
         <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="MyText_H1" parent="MyText_H">

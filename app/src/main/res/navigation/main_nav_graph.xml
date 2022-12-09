@@ -15,13 +15,13 @@
 
     <fragment
         android:id="@+id/popularFragment"
-        android:name="com.tagplus.addhashtags.view.pop.PopularFragment"
+        android:name="com.tagplus.addhashtags.View.Pop.PopularFragment"
         android:label="PopularFragment"
         tools:layout="@layout/fragment_pop" />
 
     <fragment
         android:id="@+id/mineFragment"
-        android:name="com.tagplus.addhashtags.view.mine.MineFragment"
+        android:name="com.tagplus.addhashtags.View.Mine.MineFragment"
         android:label="MineFragment"
         tools:layout="@layout/fragment_mine" />
 </navigation>
