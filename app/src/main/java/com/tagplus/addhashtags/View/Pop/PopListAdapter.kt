@@ -5,15 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.tagplus.addhashtags.databinding.ViewRvPopItemBinding
 import com.tagplus.addhashtags.Model.HashTag
+import com.tagplus.addhashtags.databinding.ViewRvPopItemBinding
 
 class PopListAdapter : ListAdapter<HashTag, PopListAdapter.PopListAdapterViewHolder>(diff) {
     inner class PopListAdapterViewHolder(private val viewRvPopItemBinding: ViewRvPopItemBinding) : RecyclerView.ViewHolder(viewRvPopItemBinding.root) {
         fun bind(position: Int) {
             with(viewRvPopItemBinding) {
-                tvRvPopItemNo.text = position.toString()
-                tvRvPopItemConent.text = currentList[position].content
+                tvRvPopItemNo.text = (position.plus(1)).toString()
+                tvRvPopItemContent.text = currentList[position].content
+                tvRvPopItemContentCount.text = currentList[position].count.toString()
             }
         }
     }

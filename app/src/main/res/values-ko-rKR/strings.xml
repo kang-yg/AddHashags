@@ -1,24 +1,17 @@
 <resources>
-    <!--FCM-->
+    <string name="app_name">Tag+</string>
+
+    <!-- FCM -->
     <string name="channel_id_update">Update</string>
     <string name="channel_description_update">업데이트 안내</string>
     <string name="channel_id_notice">Notice</string>
     <string name="channel_description_notice">공지사항 안내</string>
-
-    <!-- Basic -->
-    <string name="app_name">Tag+</string>
-    <string name="input_tag_title">태그모음 제목</string>
-    <string name="input_tag_title_example">입력 예시) \nDeveloper</string>
-    <string name="input_tag">태그입력</string>
-    <string name="input_tag_example">입력 예시1) \n#안드로이드 #개발자\n\n입력 예시2) \n여행 좋아</string>
-    <string name="input_tag_max">최대 태그의 개수는 30개입니다.</string>
-    <string name="input_tag_submit">추가하기</string>
-    <string name="input_tag_back">뒤로가기</string>
-    <string name="tag_copy">복사</string>
-    <string name="tag_remove">삭제</string>
-    <string name="copied_success">클립보드에 복사되었습니다.</string>
-
     <!-- TapLayout -->
     <string name="popularTags">POP</string>
     <string name="myTags">MINE</string>
+
+    <!-- PopularFragment -->
+    <string name="rank">순위</string>
+    <string name="tag">태그</string>
+    <string name="count">횟수</string>
 </resources>
