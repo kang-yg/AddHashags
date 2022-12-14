@@ -51,7 +51,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvMineHashTagTitle"
                 tools:text="Content" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,12 +66,13 @@
             <ImageButton
                 android:id="@+id/ivMineHashTagContentFavorite"
                 style="@style/MyImageView_Base"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_baseline_star_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/Yellow" />
 
             <ImageButton
                 android:id="@+id/ivMineHashTagContentCopy"
@@ -94,7 +94,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivMineHashTagContentCopy"
-                app:layout_constraintTop_toBottomOf="@id/ivMineHashTagContentFavorite" />
+                app:layout_constraintTop_toBottomOf="@id/ivMineHashTagContentFavorite"
+                app:tint="@color/Red" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

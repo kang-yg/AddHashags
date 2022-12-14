@@ -14,4 +14,7 @@
     <string name="rank">순위</string>
     <string name="tag">태그</string>
     <string name="count">횟수</string>
+
+    <!-- MineFragment -->
+    <string name="add">추가</string>
 </resources>

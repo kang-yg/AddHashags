@@ -15,4 +15,7 @@
     <string name="rank">ランク</string>
     <string name="tag">タグ</string>
     <string name="count">回数</string>
+
+    <!-- MineFragment -->
+    <string name="add">追加</string>
 </resources>
