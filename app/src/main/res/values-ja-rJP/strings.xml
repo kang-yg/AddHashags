@@ -18,4 +18,7 @@
 
     <!-- MineFragment -->
     <string name="add">追加</string>
+
+    <!-- AddMineFragment -->
+    <string name="new_mine_tag">"新しいハッシュタグ "</string>
 </resources>

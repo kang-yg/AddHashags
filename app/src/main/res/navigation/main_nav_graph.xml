@@ -23,5 +23,17 @@
         android:id="@+id/mineFragment"
         android:name="com.tagplus.addhashtags.View.Mine.MineFragment"
         android:label="MineFragment"
-        tools:layout="@layout/fragment_mine" />
+        tools:layout="@layout/fragment_mine">
+        <action
+            android:id="@+id/action_mineFragment_to_mineAddFragment"
+            app:destination="@id/mineAddFragment"
+            app:restoreState="true"/>
+    </fragment>
+
+    <dialog
+        android:id="@+id/mineAddFragment"
+        android:name="com.tagplus.addhashtags.View.Mine.MineAddFragment"
+        android:label="MineAddFragment"
+        tools:layout="@layout/fragment_mine_add" >
+    </dialog>
 </navigation>
