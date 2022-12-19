@@ -9,19 +9,33 @@ import com.tagplus.addhashtags.R
 import com.tagplus.addhashtags.View.BaseFragment
 import com.tagplus.addhashtags.ViewModel.MineFragmentViewModel
 import com.tagplus.addhashtags.databinding.FragmentMineBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MineFragment : BaseFragment<FragmentMineBinding>(FragmentMineBinding::inflate) {
     private lateinit var navController: NavController
     private val mineFragmentViewModel: MineFragmentViewModel by viewModels()
+    private val mineListAdapter = MineListAdapter()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
 
         binding?.let {
-            navController = findNavController()
-
+            initRvMine()
+            observeAllHashTagsLiveDataFromDB()
             it.btShowFragmentMineAdd.setOnClickListener {
                 navController.navigate(R.id.action_mineFragment_to_mineAddFragment)
             }
+        }
+    }
+
+    private fun initRvMine() {
+        binding!!.rvMine.adapter = mineListAdapter
+    }
+
+    private fun observeAllHashTagsLiveDataFromDB() {
+        mineFragmentViewModel.allHashTagsLiveDataFromDB.observe(viewLifecycleOwner) {
+            mineListAdapter.submitList(it)
         }
     }
 }
