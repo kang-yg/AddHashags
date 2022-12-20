@@ -11,7 +11,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll">
+            app:layout_scrollFlags="scroll|enterAlways">
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"

@@ -19,7 +19,7 @@ class MineListAdapter(private val callback: (MineRecyclerViewItemEvent, MineHash
                     tvMineHashTagContent.isSingleLine = !mineHashTag.expand
                 }
                 tvMineHashTagTitle.text = mineHashTag.title
-                tvMineHashTagContent.text = mineHashTag.content.joinToString()
+                tvMineHashTagContent.text = mineHashTag.content.joinToString(" ")
                 with(ivMineHashTagContentFavorite) {
                     if (mineHashTag.favorite) setImageResource(R.drawable.ic_baseline_star_24)
                     else setImageResource(R.drawable.ic_baseline_star_outline_24)
