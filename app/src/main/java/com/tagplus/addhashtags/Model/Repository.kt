@@ -9,4 +9,8 @@ class Repository @Inject constructor(private val databaseReference: DatabaseRefe
     fun getAllMineHashTagsFromDB() = localServiceHelper.getAllMineHashTags()
 
     fun insertMineHashTagToDB(mineHashTag: MineHashTag) = localServiceHelper.insertMineHashTag(mineHashTag)
+
+    fun updateMineHashTagToDB(mineHashTag: MineHashTag) = localServiceHelper.updateMineHashTag(mineHashTag)
+
+    fun deleteMineHashTagFromDB(mineHashTag: MineHashTag) = localServiceHelper.deleteMineHashTag(mineHashTag)
 }

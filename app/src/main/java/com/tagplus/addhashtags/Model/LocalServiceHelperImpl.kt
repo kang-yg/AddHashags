@@ -8,5 +8,7 @@ class LocalServiceHelperImpl @Inject constructor(private val appDataBase: AppDat
 
     override fun insertMineHashTag(mineHashTag: MineHashTag) = appDataBase.localService().insertMineHashTag(mineHashTag)
 
+    override fun updateMineHashTag(mineHashTag: MineHashTag) = appDataBase.localService().updateMineHashTag(mineHashTag)
+
     override fun deleteMineHashTag(mineHashTag: MineHashTag) = appDataBase.localService().deleteMineHashTag(mineHashTag)
 }

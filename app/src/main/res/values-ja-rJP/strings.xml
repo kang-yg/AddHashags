@@ -18,6 +18,7 @@
 
     <!-- MineFragment -->
     <string name="add">追加</string>
+    <string name="copy_success">コピー成功!!</string>
 
     <!-- AddMineFragment -->
     <string name="new_mine_tag">&lt;新しいハッシュタグ&gt;</string>

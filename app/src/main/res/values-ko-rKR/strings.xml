@@ -17,6 +17,7 @@
 
     <!-- MineFragment -->
     <string name="add">추가</string>
+    <string name="copy_success">복사 성공!!</string>
 
     <!-- AddMineFragment -->
     <string name="new_mine_tag">&lt;New HashTag&gt;</string>

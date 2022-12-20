@@ -1,9 +1,6 @@
 package com.tagplus.addhashtags.Model
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -13,6 +10,9 @@ interface LocalService {
 
     @Insert
     fun insertMineHashTag(mineHashTag: MineHashTag)
+
+    @Update
+    fun updateMineHashTag(mineHashTag: MineHashTag)
 
     @Delete
     fun deleteMineHashTag(mineHashTag: MineHashTag)
