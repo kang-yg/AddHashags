@@ -19,5 +19,8 @@
     <string name="add">추가</string>
 
     <!-- AddMineFragment -->
-    <string name="new_mine_tag">New HashTag</string>
+    <string name="new_mine_tag">&lt;New HashTag&gt;</string>
+    <string name="new_mine_title">Title</string>
+    <string name="new_mine_tags">Tags</string>
+    <string name="new_mine_done">완료</string>
 </resources>

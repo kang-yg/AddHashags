@@ -20,5 +20,8 @@
     <string name="add">追加</string>
 
     <!-- AddMineFragment -->
-    <string name="new_mine_tag">"新しいハッシュタグ "</string>
+    <string name="new_mine_tag">&lt;新しいハッシュタグ&gt;</string>
+    <string name="new_mine_title">題名</string>
+    <string name="new_mine_tags">タグ</string>
+    <string name="new_mine_done">終わり</string>
 </resources>
