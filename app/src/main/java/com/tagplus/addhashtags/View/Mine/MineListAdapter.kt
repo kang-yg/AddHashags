@@ -17,6 +17,7 @@ class MineListAdapter(private val callback: (MineRecyclerViewItemEvent, MineHash
                 cvRvMineItem.setOnClickListener {
                     mineHashTag.expand = !mineHashTag.expand
                     tvMineHashTagContent.isSingleLine = !mineHashTag.expand
+                    tvMineHashTagTitle.isSingleLine = !mineHashTag.expand
                 }
                 tvMineHashTagTitle.text = mineHashTag.title
                 tvMineHashTagContent.text = mineHashTag.content.joinToString(" ")
