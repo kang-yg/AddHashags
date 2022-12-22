@@ -47,11 +47,12 @@ class PopularFragmentViewModel @Inject constructor(private val repository: Repos
         return result.countElement().sortDescendingByCountOfElement()
     }
 
-    private fun String.splitHash(): List<String> = split(" ", "\n", "#").filter { it.isNotEmpty() }
+    private fun String.splitHash(): List<String> = split(" ", "\n", "#").filter { it.isNotBlank() }
 
     private fun List<*>.countElement(): Map<*, Int> = groupingBy { it }.eachCount()
 
-    private fun Map<*, Int>.sortDescendingByCountOfElement() = toList().sortedBy { it.second }.reversed().toSet().map { (it.first as HashTag).copy(count = it.second) }
+    private fun Map<*, Int>.sortDescendingByCountOfElement(): List<HashTag> =
+        toList().sortedBy { it.second }.toSet().reversed().map { (it.first as HashTag).copy(count = it.second) }
 
     init {
         getPopularTags()

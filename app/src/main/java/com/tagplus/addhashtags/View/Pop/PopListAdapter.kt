@@ -9,12 +9,12 @@ import com.tagplus.addhashtags.Model.HashTag
 import com.tagplus.addhashtags.databinding.ViewRvPopItemBinding
 
 class PopListAdapter : ListAdapter<HashTag, PopListAdapter.PopListAdapterViewHolder>(diff) {
-    inner class PopListAdapterViewHolder(private val viewRvPopItemBinding: ViewRvPopItemBinding) : RecyclerView.ViewHolder(viewRvPopItemBinding.root) {
-        fun bind(position: Int) {
+    class PopListAdapterViewHolder(private val viewRvPopItemBinding: ViewRvPopItemBinding) : RecyclerView.ViewHolder(viewRvPopItemBinding.root) {
+        fun bind(position: Int, currentHashTah: HashTag) {
             with(viewRvPopItemBinding) {
                 tvRvPopItemNo.text = (position.plus(1)).toString()
-                tvRvPopItemContent.text = currentList[position].content
-                tvRvPopItemContentCount.text = currentList[position].count.toString()
+                tvRvPopItemContent.text = currentHashTah.content
+                tvRvPopItemContentCount.text = currentHashTah.count.toString()
             }
         }
     }
@@ -25,7 +25,7 @@ class PopListAdapter : ListAdapter<HashTag, PopListAdapter.PopListAdapterViewHol
     }
 
     override fun onBindViewHolder(holder: PopListAdapterViewHolder, position: Int) {
-        holder.bind(position)
+        holder.bind(position, currentList[position])
     }
 
     companion object {
