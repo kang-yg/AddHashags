@@ -17,6 +17,8 @@
 
     <!-- MineFragment -->
     <string name="add">추가</string>
+    <string name="all">전체</string>
+    <string name="favorites">즐겨찾기</string>
     <string name="copy_success">복사 성공!!</string>
 
     <!-- AddMineFragment -->

@@ -1,9 +1,6 @@
 package com.tagplus.addhashtags.ViewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.tagplus.addhashtags.Model.MineHashTag
 import com.tagplus.addhashtags.Model.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +11,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MineFragmentViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+    private val _btShowFragmentMineSwitchAllAndFavoriteStateLiveData: MutableLiveData<Boolean> = MutableLiveData(true)
+    val btShowFragmentMineSwitchAllAndFavoriteStateLiveData: LiveData<Boolean>
+        get() = _btShowFragmentMineSwitchAllAndFavoriteStateLiveData
     val allHashTagsLiveDataFromDB: LiveData<List<MineHashTag>> = repository.getAllMineHashTagsFromDB().asLiveData()
+    val favoriteHashTagsLiveDataFromDB: LiveData<List<MineHashTag>> = repository.getFavoriteMineHashTagsFromDB().asLiveData()
 
     fun updateMineHashTagToDB(mineHashTag: MineHashTag) {
         viewModelScope.launch {
@@ -31,4 +32,6 @@ class MineFragmentViewModel @Inject constructor(private val repository: Reposito
             }
         }
     }
+
+    fun switchAllAndFavoriteLiveDataState(isAll: Boolean) = _btShowFragmentMineSwitchAllAndFavoriteStateLiveData.postValue(isAll)
 }

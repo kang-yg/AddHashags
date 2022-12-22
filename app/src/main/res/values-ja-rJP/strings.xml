@@ -18,6 +18,8 @@
 
     <!-- MineFragment -->
     <string name="add">追加</string>
+    <string name="all">"全て "</string>
+    <string name="favorites">お気に入り</string>
     <string name="copy_success">コピー成功!!</string>
 
     <!-- AddMineFragment -->

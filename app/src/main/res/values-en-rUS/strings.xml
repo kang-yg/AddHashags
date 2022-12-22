@@ -18,6 +18,8 @@
 
     <!-- MineFragment -->
     <string name="add">Add</string>
+    <string name="all">All</string>
+    <string name="favorites">Favorites</string>
     <string name="copy_success">Copy Success!!</string>
 
     <!-- AddMineFragment -->

@@ -23,27 +23,57 @@ class MineFragment : BaseFragment<FragmentMineBinding>(FragmentMineBinding::infl
     private val mineListAdapter = MineListAdapter { mineRecyclerViewItemEvent, mineHashTag ->
         itemEvent(mineRecyclerViewItemEvent, mineHashTag)
     }
+    private val mineFavoriteListAdapter = MineListAdapter { mineRecyclerViewItemEvent, mineHashTag ->
+        itemEvent(mineRecyclerViewItemEvent, mineHashTag)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
 
         binding?.let {
-            initRvMine()
             observeAllHashTagsLiveDataFromDB()
+            observerFavoriteHashTagsLiveDataFromDB()
+            observeBtShowFragmentMineSwitchAllAndFavoriteStateLiveData()
             it.btShowFragmentMineAdd.setOnClickListener {
                 navController.navigate(R.id.action_mineFragment_to_mineAddFragment)
             }
+            it.btShowFragmentMineSwitchAllAndFavorite.setOnClickListener { _ ->
+                val currentSwitchAllAndFavoriteLiveDataState = mineFragmentViewModel.btShowFragmentMineSwitchAllAndFavoriteStateLiveData.value!!
+                mineFragmentViewModel.switchAllAndFavoriteLiveDataState(!currentSwitchAllAndFavoriteLiveDataState)
+            }
         }
-    }
-
-    private fun initRvMine() {
-        binding!!.rvMine.adapter = mineListAdapter
     }
 
     private fun observeAllHashTagsLiveDataFromDB() {
         mineFragmentViewModel.allHashTagsLiveDataFromDB.observe(viewLifecycleOwner) {
             mineListAdapter.submitList(it)
+        }
+    }
+
+    private fun observerFavoriteHashTagsLiveDataFromDB() {
+        mineFragmentViewModel.favoriteHashTagsLiveDataFromDB.observe(viewLifecycleOwner) {
+            mineFavoriteListAdapter.submitList(it)
+        }
+    }
+
+    private fun observeBtShowFragmentMineSwitchAllAndFavoriteStateLiveData() {
+        mineFragmentViewModel.btShowFragmentMineSwitchAllAndFavoriteStateLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                true -> {
+                    binding!!.rvMine.adapter = mineListAdapter
+                    with(binding!!.btShowFragmentMineSwitchAllAndFavorite) {
+                        text = getString(R.string.all)
+                    }
+                }
+
+                false -> {
+                    binding!!.rvMine.adapter = mineFavoriteListAdapter
+                    with(binding!!.btShowFragmentMineSwitchAllAndFavorite) {
+                        text = getString(R.string.favorites)
+                    }
+                }
+            }
         }
     }
 
