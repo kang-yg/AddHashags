@@ -42,7 +42,8 @@ class MineAddFragment : BaseDialogFragment<FragmentMineAddBinding>(FragmentMineA
         }
     }
 
-    private fun addChip(hashTagText: String) {
+    private fun addChip(inputCharSequence: CharSequence) {
+        val hashTagText = if (inputCharSequence.first().toString() != "#") "#".plus(inputCharSequence) else inputCharSequence.toString()
         binding?.let {
             val chipGroup = it.cgAddMineTag
             if (chipGroup.childCount < 30) {
@@ -68,11 +69,20 @@ class MineAddFragment : BaseDialogFragment<FragmentMineAddBinding>(FragmentMineA
         }
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            if (s.isNotEmpty())
-                if (s.last().toString() == " ") {
-                    if (s.toString() != " ") addChip("#".plus(s))
+            if (s.isNotEmpty()) {
+                if (s.last().toString() == " ") { // Space 가 입력됬을 경우
+                    if (s.isNotBlank()) {
+                        addChip(s)
+                    }
+                    binding!!.tieAddMineTag.setText("")
+                } else if (s.last().toString() == "#") { // # 이 입력됬을 경우
+                    val withoutLastChar = s.dropLast(1)
+                    if (withoutLastChar.isNotBlank()) {
+                        addChip(withoutLastChar)
+                    }
                     binding!!.tieAddMineTag.setText("")
                 }
+            }
         }
 
         override fun afterTextChanged(s: Editable?) {
